@@ -5,6 +5,7 @@ create table if not exists public.ambassadors (
   bio text,
   image_url text,
   year text,
+  age integer,
   created_at timestamp with time zone default now()
 );
 
@@ -22,9 +23,12 @@ create table if not exists public.teachers (
 create table if not exists public.projects (
   id uuid primary key default gen_random_uuid(),
   title text not null,
-  description text not null,
+  description text,
   image_url text,
   year text,
+  short_description text,
+  long_description text,
+  extra_images text default '[]',
   created_at timestamp with time zone default now()
 );
 

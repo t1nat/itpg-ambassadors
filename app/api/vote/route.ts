@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("[v0] Error processing vote:", error)
+    console.error("Error processing vote:", error)
     return NextResponse.json({ error: "Failed to process vote" }, { status: 500 })
   }
 }

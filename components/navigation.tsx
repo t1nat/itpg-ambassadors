@@ -16,6 +16,7 @@ export function Navigation() {
     { href: "/teachers", label: "Teachers" },
     { href: "/projects", label: "Projects" },
     { href: "/results", label: "Results" },
+    { href: "/admin", label: "Admin" },
   ]
 
   return (
