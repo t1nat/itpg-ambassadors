@@ -4,22 +4,20 @@ import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-//import { GoogleTranslate } from "@/components/google-translate"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 })
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 })
 
 export const metadata: Metadata = {
   title: "ITPG Ambassadors",
-  description: "EU Ambassador Program at ITPG",
-  generator: "v0.app",
+  description: "EP Ambassador Program at ITPG",
 }
 
 export default function RootLayout({

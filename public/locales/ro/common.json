@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "home": "Acasă",
+    "ambassadors": "Ambasadori",
+    "teachers": "Profesori",
+    "projects": "Proiecte",
+    "results": "Rezultate",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "Ambasadorii ITPG",
+    "subtitle": "Ambasadorii PGKMKS „Acad. Blagovest Sendov\" în programul „Școli - Ambasadori ai Parlamentului European\"",
+    "viewProjects": "Vezi proiecte",
+    "meetTeam": "Întâlnește echipa noastră"
+  },
+  "stats": {
+    "ambassadors": "Ambasadori mândri",
+    "countries": "x",
+    "completedProjects": "Proiecte finalizate",
+    "engagedStudents": "Studenti implicați"
+  },
+  "features": {
+    "title": "Ce facem",
+    "subtitle": "Programul nostru se concentrează pe patru domenii cheie ale dezvoltării studențești",
+    "knowledge": "Schimb de cunoștințe",
+    "knowledgeDesc": "Conectare cu studenți din toată Europa. Îmbogățirea cunoștințelor culturale.",
+    "education": "Proiecte educaționale",
+    "educationDesc": "Inițiative pentru învățare comună în diferite țări.",
+    "innovation": "Inovare",
+    "innovationDesc": "Soluții digitale și abordări creative pentru provocări.",
+    "sustainability": "Dezvoltare durabilă",
+    "sustainabilityDesc": "Promovarea practicilor verzi și acțiunilor climatice. Difuzarea ideilor."
+  },
+  "cta": {
+    "title": "Votează pentru proiectul tău preferat",
+    "subtitle": "Ajută-ne să recunoaștem realizările excepționale ale studenților votând pentru cele mai bune proiecte",
+    "voteNow": "Votează acum"
+  },
+  "footer": {
+    "title": "Ambasadorii ITPG",
+    "description": "Promovarea valorilor europene și cooperării internaționale prin inițiative conduse de studenți.",
+    "quickLinks": "Linkuri rapide",
+    "ambassadors": "Ambasadori",
+    "teachers": "Profesori",
+    "projects": "Proiecte",
+    "contact": "Contact",
+    "rights": "Toate drepturile rezervate"
+  },
+  "ambassadors": {
+    "title": "Our Ambassadors",
+    "description": "Meet our ambassadors who inspire and lead the way to a better future through their initiatives and engagement.",
+    "noAmbassadors": "No ambassadors found. Please check back later."
+  },
+  "projects": {
+    "title": "Our Projects",
+    "description": "Explore the wonderful initiatives created by our ambassadors. Vote for your favorite projects!",
+    "noProjects": "No projects found. Please check back later."
+  },
+  "teachers": {
+    "title": "Our Teachers",
+    "description": "The dedicated educators guiding and mentoring our ambassadors through their journey of European cooperation and cultural exchange.",
+    "noTeachers": "No teachers found. Please check back later."
+  },
+  "project": {
+    "voted": "Voted ✅",
+    "voting": "Voting...",
+    "vote": "Vote",
+    "showLess": "Show Less ▲",
+    "readMore": "Read More ▼",
+    "voteError": "Failed to vote. Try again."
+  },
+  "loading": "Loading...",
+  "language": "Limbă"
+}

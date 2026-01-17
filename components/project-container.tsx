@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from "react"
+import { useTranslation } from 'react-i18next'
+
 // Интерфейсът Project е същият
 export interface Project {
   id: number
@@ -16,6 +18,7 @@ interface ProjectContainerProps {
 }
 
 export function ProjectContainer({ project }: ProjectContainerProps) {
+  const { t } = useTranslation('common')
   const [voted, setVoted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -40,7 +43,7 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
         setVoted(true)
       }
     } catch (err) {
-      setError("Failed to vote. Try again.")
+      setError(t('project.voteError', 'Failed to vote. Try again.'))
     } finally {
       setLoading(false)
     }
@@ -78,7 +81,7 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
             ${voted ? "bg-green-500 scale-105 shadow-md" : "bg-blue-500 hover:bg-blue-600 hover:scale-105"}
             ${loading ? "opacity-70 cursor-wait" : ""}`}
         >
-          {voted ? "Voted ✅" : loading ? "Voting..." : "Vote"}
+          {voted ? t('project.voted', 'Voted ✅') : loading ? t('project.voting', 'Voting...') : t('project.vote', 'Vote')}
         </button>
       </div>
 
@@ -95,7 +98,7 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
           onClick={() => setExpanded(!expanded)}
           className="text-sm text-blue-500 hover:underline font-medium"
         >
-          {expanded ? "Show Less ▲" : "Read More ▼"}
+          {expanded ? t('project.showLess', 'Show Less ▲') : t('project.readMore', 'Read More ▼')}
         </button>
       </div>
 

@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "home": "Дома",
+    "ambassadors": "Амбасадори",
+    "teachers": "Наставници",
+    "projects": "Проекти",
+    "results": "Резултати",
+    "admin": "Админ"
+  },
+  "hero": {
+    "title": "Амбасадори ITPG",
+    "subtitle": "Амбасадори на ПГКМКС „Акад. Благовест Сендов\" во програмата „Училишта - Амбасадори на Европскиот парламент\"",
+    "viewProjects": "Види проекти",
+    "meetTeam": "Запознајте се со нашиот тим"
+  },
+  "stats": {
+    "ambassadors": "Горди амбасадори",
+    "countries": "x",
+    "completedProjects": "Завршени проекти",
+    "engagedStudents": "Ангажирани студенти"
+  },
+  "features": {
+    "title": "Што правиме",
+    "subtitle": "Нашата програма се фокусира на четири клучни области на развој на студентите",
+    "knowledge": "Размена на знаење",
+    "knowledgeDesc": "Поврзување со студенти од цела Европа. Збогатување на културните знаења.",
+    "education": "Образовни проекти",
+    "educationDesc": "Иницијативи за заедничко учење во различни земји.",
+    "innovation": "Иновација",
+    "innovationDesc": "Дигитални решенија и креативни пристапи кон предизвиците.",
+    "sustainability": "Одржлив развој",
+    "sustainabilityDesc": "Промовирање на зелени практики и климатски акции. Ширење на идеи."
+  },
+  "cta": {
+    "title": "Гласај за твојот омилен проект",
+    "subtitle": "Помогнете ни да ги препознаеме извонредните достигнувања на студентите со гласање за најдобрите проекти",
+    "voteNow": "Гласај сега"
+  },
+  "footer": {
+    "title": "Амбасадори ITPG",
+    "description": "Промовирање на европските вредности и меѓународната соработка преку иницијативи водени од студенти.",
+    "quickLinks": "Брзи врски",
+    "ambassadors": "Амбасадори",
+    "teachers": "Наставници",
+    "projects": "Проекти",
+    "contact": "Контакт",
+    "rights": "Сите права задржани"
+  },
+  "ambassadors": {
+    "title": "Our Ambassadors",
+    "description": "Meet our ambassadors who inspire and lead the way to a better future through their initiatives and engagement.",
+    "noAmbassadors": "No ambassadors found. Please check back later."
+  },
+  "projects": {
+    "title": "Our Projects",
+    "description": "Explore the wonderful initiatives created by our ambassadors. Vote for your favorite projects!",
+    "noProjects": "No projects found. Please check back later."
+  },
+  "teachers": {
+    "title": "Our Teachers",
+    "description": "The dedicated educators guiding and mentoring our ambassadors through their journey of European cooperation and cultural exchange.",
+    "noTeachers": "No teachers found. Please check back later."
+  },
+  "project": {
+    "voted": "Voted ✅",
+    "voting": "Voting...",
+    "vote": "Vote",
+    "showLess": "Show Less ▲",
+    "readMore": "Read More ▼",
+    "voteError": "Failed to vote. Try again."
+  },
+  "loading": "Loading...",
+  "language": "Јазик"
+}

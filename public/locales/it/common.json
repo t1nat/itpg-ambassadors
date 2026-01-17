@@ -1,0 +1,84 @@
+{
+  "nav": {
+    "home": "Home",
+    "ambassadors": "Ambasciatori",
+    "teachers": "Insegnanti",
+    "projects": "Progetti",
+    "results": "Risultati",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "Ambasciatori ITPG",
+    "subtitle": "Ambasciatori del PGKMKS „Acad. Blagovest Sendov\" nel programma „Scuole - Ambasciatori del Parlamento Europeo\"",
+    "viewProjects": "Visualizza progetti",
+    "meetTeam": "Incontra il nostro team"
+  },
+  "stats": {
+    "ambassadors": "Ambasciatori orgogliosi",
+    "countries": "x",
+    "completedProjects": "Progetti completati",
+    "engagedStudents": "Studenti coinvolti"
+  },
+  "features": {
+    "title": "Cosa facciamo",
+    "subtitle": "Il nostro programma si concentra su quattro aree chiave dello sviluppo studentesco",
+    "knowledge": "Scambio di conoscenze",
+    "knowledgeDesc": "Connessione con studenti di tutta Europa. Arricchimento delle conoscenze culturali.",
+    "education": "Progetti educativi",
+    "educationDesc": "Iniziative per l'apprendimento congiunto in diversi paesi.",
+    "innovation": "Innovazione",
+    "innovationDesc": "Soluzioni digitali e approcci creativi alle sfide.",
+    "sustainability": "Sviluppo sostenibile",
+    "sustainabilityDesc": "Promozione di pratiche verdi e azioni climatiche. Diffusione di idee."
+  },
+  "cta": {
+    "title": "Vota per il tuo progetto preferito",
+    "subtitle": "Aiutaci a riconoscere i risultati eccezionali degli studenti votando per i migliori progetti",
+    "voteNow": "Vota ora"
+  },
+  "footer": {
+    "title": "Ambasciatori ITPG",
+    "description": "Promozione dei valori europei e della cooperazione internazionale attraverso iniziative guidate dagli studenti.",
+    "quickLinks": "Collegamenti rapidi",
+    "ambassadors": "Ambasciatori",
+    "teachers": "Insegnanti",
+    "projects": "Progetti",
+    "contact": "Contatto",
+    "rights": "Tutti i diritti riservati"
+  },
+  "ambassadors": {
+    "title": "I Nostri Ambasciatori",
+    "description": "Incontra i nostri ambasciatori che ispirano e guidano il cammino verso un futuro migliore attraverso le loro iniziative e il loro impegno.",
+    "noAmbassadors": "Nessun ambasciatore trovato. Si prega di riprovare più tardi."
+  },
+  "projects": {
+    "title": "I Nostri Progetti",
+    "description": "Esplora le meravigliose iniziative create dai nostri ambasciatori. Vota per i tuoi progetti preferiti!",
+    "noProjects": "Nessun progetto trovato. Si prega di riprovare più tardi."
+  },
+  "teachers": {
+    "title": "I Nostri Insegnanti",
+    "description": "Gli educatori dedicati che guidano e mentorano i nostri ambasciatori attraverso il loro viaggio di cooperazione europea e scambio culturale.",
+    "noTeachers": "Nessun insegnante trovato. Si prega di riprovare più tardi."
+  },
+  "project": {
+    "voted": "Votato ✅",
+    "voting": "Votazione in corso...",
+    "vote": "Vota",
+    "showLess": "Mostra meno ▲",
+    "readMore": "Leggi di più ▼",
+    "voteError": "Voto fallito. Riprova."
+  },
+  "results": {
+    "title": "Risultati della votazione",
+    "description": "Vedi quali progetti stanno guidando il voto! Totale voti espressi:",
+    "firstPlace": "1° posto",
+    "secondPlace": "2° posto",
+    "thirdPlace": "3° posto",
+    "vote": "voto",
+    "votes": "voti",
+    "noResults": "Nessun risultato di votazione disponibile ancora."
+  },
+  "loading": "Caricamento...",
+  "language": "Lingua"
+}

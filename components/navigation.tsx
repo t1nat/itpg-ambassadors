@@ -5,29 +5,34 @@ import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
+import { LanguageSwitcher } from "@/components/language-switcher"
+import { useTranslation } from 'react-i18next'
 
 export function Navigation() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
+  const { t } = useTranslation('common')
+
+  const currentLocale = pathname.split('/')[1] || 'bg'
 
   const links = [
-    { href: "/", label: "Home" },
-    { href: "/ambassadors", label: "Ambassadors" },
-    { href: "/teachers", label: "Teachers" },
-    { href: "/projects", label: "Projects" },
-    { href: "/results", label: "Results" },
-    { href: "/admin", label: "Admin" },
+    { href: `/${currentLocale}`, label: t('nav.home') },
+    { href: `/${currentLocale}/ambassadors`, label: t('nav.ambassadors') },
+    { href: `/${currentLocale}/teachers`, label: t('nav.teachers') },
+    { href: `/${currentLocale}/projects`, label: t('nav.projects') },
+    { href: `/${currentLocale}/results`, label: t('nav.results') },
+    { href: "/admin", label: t('nav.admin') },
   ]
 
   return (
     <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-              <span className="text-lg font-bold text-primary-foreground">IT</span>
+          <Link href={`/${currentLocale}`} className="flex items-center gap-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#306FEC] to-[#8FCEC7]">
+              <span className="text-lg font-bold text-white">IT</span>
             </div>
-            <span className="text-xl font-bold">ITPG Ambassadors</span>
+            <span className="text-xl font-bold bg-gradient-to-r from-[#306FEC] to-[#8FCEC7] bg-clip-text text-transparent">ITPG Ambassadors</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -43,6 +48,7 @@ export function Navigation() {
                 {link.label}
               </Link>
             ))}
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile Menu Button */}
@@ -67,6 +73,9 @@ export function Navigation() {
                   {link.label}
                 </Link>
               ))}
+              <div className="pt-2">
+                <LanguageSwitcher />
+              </div>
             </div>
           </div>
         )}

@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "home": "Domů",
+    "ambassadors": "Velvyslanci",
+    "teachers": "Učitelé",
+    "projects": "Projekty",
+    "results": "Výsledky",
+    "admin": "Admin"
+  },
+  "hero": {
+    "title": "Velvyslanci ITPG",
+    "subtitle": "Velvyslanci PGKMKS „Acad. Blagovest Sendov\" v programu „Školy - Velvyslanci Evropského parlamentu\"",
+    "viewProjects": "Zobrazit projekty",
+    "meetTeam": "Seznamte se s naším týmem"
+  },
+  "stats": {
+    "ambassadors": "Hrdí velvyslanci",
+    "countries": "x",
+    "completedProjects": "Dokončené projekty",
+    "engagedStudents": "Zapojení studenti"
+  },
+  "features": {
+    "title": "Co děláme",
+    "subtitle": "Náš program se zaměřuje na čtyři klíčové oblasti rozvoje studentů",
+    "knowledge": "Výměna znalostí",
+    "knowledgeDesc": "Spojení se studenty z celé Evropy. Obohacení kulturních znalostí.",
+    "education": "Vzdělávací projekty",
+    "educationDesc": "Iniciativy pro společné učení v různých zemích.",
+    "innovation": "Inovace",
+    "innovationDesc": "Digitální řešení a kreativní přístupy k výzvám.",
+    "sustainability": "Udržitelný rozvoj",
+    "sustainabilityDesc": "Podpora zelených praktik a klimatických akcí. Šíření nápadů."
+  },
+  "cta": {
+    "title": "Hlasujte pro svůj oblíbený projekt",
+    "subtitle": "Pomozte nám ocenit výjimečné úspěchy studentů hlasováním pro nejlepší projekty",
+    "voteNow": "Hlasovat nyní"
+  },
+  "footer": {
+    "title": "Velvyslanci ITPG",
+    "description": "Podpora evropských hodnot a mezinárodní spolupráce prostřednictvím iniciativ vedených studenty.",
+    "quickLinks": "Rychlé odkazy",
+    "contact": "Kontakt",
+    "rights": "Všechna práva vyhrazena"
+  },
+  "ambassadors": {
+    "title": "Our Ambassadors",
+    "description": "Meet our ambassadors who inspire and lead the way to a better future through their initiatives and engagement.",
+    "noAmbassadors": "No ambassadors found. Please check back later."
+  },
+  "projects": {
+    "title": "Our Projects",
+    "description": "Explore the wonderful initiatives created by our ambassadors. Vote for your favorite projects!",
+    "noProjects": "No projects found. Please check back later."
+  },
+  "teachers": {
+    "title": "Our Teachers",
+    "description": "The dedicated educators guiding and mentoring our ambassadors through their journey of European cooperation and cultural exchange.",
+    "noTeachers": "No teachers found. Please check back later."
+  },
+  "project": {
+    "voted": "Voted ✅",
+    "voting": "Voting...",
+    "vote": "Vote",
+    "showLess": "Show Less ▲",
+    "readMore": "Read More ▼",
+    "voteError": "Failed to vote. Try again."
+  },
+  "loading": "Loading...",
+  "language": "Jazyk"
+}

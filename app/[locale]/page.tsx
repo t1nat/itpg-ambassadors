@@ -5,6 +5,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Users, GraduationCap, Lightbulb, Award } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { useTranslation } from 'react-i18next'
+import { useI18n } from '@/lib/i18n/client'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -18,18 +20,20 @@ const staggerContainer = {
 
 
 export default function HomePage() {
+  const { t } = useTranslation('common')
+
   const stats = [
-    { number: "15", label: "Горди посланици" },
-    { number: "х", label: "Държави партньори" },
-    { number: "1", label: "Завършени проекти" },
-    { number: "500+", label: "Ангажирани ученици" },
+    { number: "15", label: t('stats.ambassadors') },
+    { number: "х", label: t('stats.countries') },
+    { number: "1", label: t('stats.completedProjects') },
+    { number: "500+", label: t('stats.engagedStudents') },
   ]
 
   const features = [
-    { icon: <Users className="h-6 w-6 text-blue-500" />, title: "Обмяна на знания", description: "Връзка с ученици от цяла Европа. Обогатяване на културните знания." },
-    { icon: <GraduationCap className="h-6 w-6 text-blue-500" />, title: "Образователни проекти", description: "Инициативи за съвместно обучение в различни държави." },
-    { icon: <Lightbulb className="h-6 w-6 text-blue-500" />, title: "Иновации", description: "Цифрови решения и креативни подходи към предизвикателствата." },
-    { icon: <Award className="h-6 w-6 text-blue-500" />, title: "Устойчиво развитие", description: "Насърчаване на зелени практики и действия за климата. Разпространяване на идеи." },
+    { icon: <Users className="h-6 w-6 text-[#306FEC]" />, title: t('features.knowledge'), description: t('features.knowledgeDesc') },
+    { icon: <GraduationCap className="h-6 w-6 text-[#8FCEC7]" />, title: t('features.education'), description: t('features.educationDesc') },
+    { icon: <Lightbulb className="h-6 w-6 text-[#B3E1F3]" />, title: t('features.innovation'), description: t('features.innovationDesc') },
+    { icon: <Award className="h-6 w-6 text-[#306FEC]" />, title: t('features.sustainability'), description: t('features.sustainabilityDesc') },
   ]
 
   return (
@@ -43,17 +47,17 @@ export default function HomePage() {
         variants={fadeUp}
       >
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-neutral-900 mb-4">
-          ITPG Ambassadors
+          {t('hero.title')}
         </h1>
         <p className="text-lg md:text-xl text-neutral-700 mb-10 max-w-2xl">
-         Посланици на ПГКМКС „Акад. Благовест Сендов" в програмата „Училища – посланици на Европейския парламент"
+          {t('hero.subtitle')}
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
-          <Button asChild size="lg" className="bg-blue-500 text-white rounded-2xl hover:bg-blue-400 transition">
-            <Link href="/projects">Виж проекти</Link>
+          <Button asChild size="lg" className="bg-[#306FEC] text-white rounded-2xl hover:bg-[#1e5bb8] transition shadow-lg hover:shadow-xl">
+            <Link href="/projects">{t('hero.viewProjects')}</Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="border-blue-500 text-blue-500 rounded-2xl hover:bg-blue-50 transition">
-            <Link href="/ambassadors">Запознай се с нашия екип</Link>
+          <Button asChild variant="outline" size="lg" className="border-[#306FEC] text-[#306FEC] rounded-2xl hover:bg-[#B3E1F3] transition">
+            <Link href="/ambassadors">{t('hero.meetTeam')}</Link>
           </Button>
         </div>
       </motion.section>
@@ -78,8 +82,8 @@ export default function HomePage() {
       <motion.section className="py-20" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
         <div className="container mx-auto px-4">
           <motion.div className="mb-12 text-center" variants={staggerContainer}>
-            <motion.h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4" variants={fadeUp}>Какво правим?</motion.h2>
-            <motion.p className="text-neutral-700 max-w-xl mx-auto" variants={fadeUp}>Нашата програма се фокусира върху четири ключови области на развитие на студентите</motion.p>
+            <motion.h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4" variants={fadeUp}>{t('features.title')}</motion.h2>
+            <motion.p className="text-neutral-700 max-w-xl mx-auto" variants={fadeUp}>{t('features.subtitle')}</motion.p>
           </motion.div>
 
           <motion.div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4" variants={staggerContainer}>
@@ -87,7 +91,7 @@ export default function HomePage() {
               <motion.div key={i} variants={fadeUp}>
                 <Card className="rounded-3xl shadow-xl hover:shadow-2xl transition border border-neutral-200 backdrop-blur-sm">
                   <CardContent className="pt-6">
-                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#B3E1F3] to-[#8FCEC7]">
                       {feature.icon}
                     </div>
                     <h3 className="text-xl font-semibold text-neutral-900 mb-2">{feature.title}</h3>
@@ -108,10 +112,10 @@ export default function HomePage() {
         viewport={{ once: true }}
         variants={fadeUp}
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-neutral-900">Гласувай за любим проект</h2>
-        <p className="mb-8 text-neutral-700 max-w-2xl mx-auto">Помогнете ни да признаем изключителните постижения на студентите, като гласувате за най-добрите проекти</p>
-        <Button asChild size="lg" className="bg-blue-500 text-white rounded-2xl hover:bg-blue-400 transition">
-          <Link href="/projects">Гласувай сега</Link>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-neutral-900">{t('cta.title')}</h2>
+        <p className="mb-8 text-neutral-700 max-w-2xl mx-auto">{t('cta.subtitle')}</p>
+        <Button asChild size="lg" className="bg-gradient-to-r from-[#306FEC] to-[#8FCEC7] text-white rounded-2xl hover:from-[#1e5bb8] hover:to-[#6bb59d] transition shadow-lg hover:shadow-xl">
+          <Link href="/projects">{t('cta.voteNow')}</Link>
         </Button>
       </motion.section>
     </div>
