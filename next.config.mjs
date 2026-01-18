@@ -1,10 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
   images: {
-    formats: ['image/webp', 'image/avif'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -12,12 +8,14 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'bgmqgozofllltfvauwhv.supabase.co', 
-        port: '',
-        pathname: '/storage/v1/object/public/**',
+        hostname: 'lh3.googleusercontent.com',
+      },
+      {
+        protocol: 'http',
+        hostname: 'googleusercontent.com',
       },
     ],
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
