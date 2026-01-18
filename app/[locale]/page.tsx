@@ -70,29 +70,47 @@ export default function HomePage() {
       >
         <motion.h1
           className="text-6xl md:text-7xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           {t('hero.title').split(' ').map((word, i) => (
             <motion.span
               key={i}
               className="inline-block mr-4"
-              variants={wordAnimation}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: i * 0.15,
+                duration: 0.6,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
             >
               {word}
             </motion.span>
           ))}
         </motion.h1>
-        <p className="text-xl md:text-2xl text-black mb-12 max-w-3xl leading-relaxed">
+        <motion.p
+          className="text-xl md:text-2xl text-black mb-12 max-w-3xl leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
           {t('hero.subtitle')}
-        </p>
-        <div className="flex flex-wrap gap-6 justify-center">
+        </motion.p>
+        <motion.div
+          className="flex flex-wrap gap-6 justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
           <Button asChild size="lg">
             <Link href={`/${currentLocale}/projects`}>{t('hero.viewProjects')}</Link>
           </Button>
           <Button asChild variant="outline" size="lg">
             <Link href={`/${currentLocale}/ambassadors`}>{t('hero.meetTeam')}</Link>
           </Button>
-        </div>
+        </motion.div>
       </motion.section>
 
       {/* Stats Section */}
