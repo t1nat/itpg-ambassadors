@@ -32,7 +32,6 @@ export function Navigation() {
     { href: `/${currentLocale}/teachers`, label: t('nav.teachers') },
     { href: `/${currentLocale}/projects`, label: t('nav.projects') },
     { href: `/${currentLocale}/results`, label: t('nav.results') },
-    { href: "/admin", label: t('nav.admin') },
   ]
 
   return (
