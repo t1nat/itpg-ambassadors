@@ -1,5 +1,6 @@
 "use client"
 
+import '@/lib/i18n/client' // Initialize i18n before useTranslation
 import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { Card, CardContent } from "@/components/ui/card"

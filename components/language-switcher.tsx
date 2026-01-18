@@ -3,9 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-// 1. Вземаме директната инстанция на i18next
-import i18nInstance from 'i18next' 
-import '@/lib/i18n/client' 
+// Import the initialized i18next instance
+import i18nInstance from '@/lib/i18n/client'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,

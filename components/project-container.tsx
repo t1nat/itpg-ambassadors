@@ -1,5 +1,6 @@
 'use client'
 
+import '@/lib/i18n/client' // Initialize i18n before useTranslation
 import { useState } from "react"
 import { useTranslation } from 'react-i18next'
 

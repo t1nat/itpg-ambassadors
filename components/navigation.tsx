@@ -1,5 +1,6 @@
 "use client"
 
+import '@/lib/i18n/client' // Initialize i18n before useTranslation
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"

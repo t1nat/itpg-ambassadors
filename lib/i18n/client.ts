@@ -40,23 +40,23 @@ export const resources = {
 }
 
 // ИНИЦИАЛИЗАЦИЯ (Преместена тук от компонентите)
-if (!i18next.isInitialized) {
-  i18next
-    .use(initReactI18next) // ТОВА СВЪРЗВА I18NEXT С REACT
-    .init({
-      resources,
-      lng: 'bg',
-      fallbackLng: 'bg',
-      supportedLngs: ['bg', 'en', 'de', 'fr', 'es', 'it', 'pl', 'ro', 'cs', 'sk', 'sl', 'hr', 'sr', 'mk', 'al', 'me'],
-      defaultNS: 'common',
-      fallbackNS: 'common',
-      interpolation: {
-        escapeValue: false, // React вече защитава от XSS
-      },
-      react: {
-        useSuspense: false // Важно за избягване на сривове при Server-Side Rendering
-      }
-    })
+const i18nInstance = i18next.use(initReactI18next);
+
+if (!i18nInstance.isInitialized) {
+  i18nInstance.init({
+    resources,
+    lng: 'bg',
+    fallbackLng: 'bg',
+    supportedLngs: ['bg', 'en', 'de', 'fr', 'es', 'it', 'pl', 'ro', 'cs', 'sk', 'sl', 'hr', 'sr', 'mk', 'al', 'me'],
+    defaultNS: 'common',
+    fallbackNS: 'common',
+    interpolation: {
+      escapeValue: false, // React вече защитава от XSS
+    },
+    react: {
+      useSuspense: false // Важно за избягване на сривове при Server-Side Rendering
+    }
+  });
 }
 
-export default i18next;
+export default i18nInstance;
