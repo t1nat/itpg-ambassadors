@@ -12,7 +12,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'zpxvpyvuzonscofvclon.supabase.co', // Extract this from your Supabase URL
+        hostname: 'bgmqgozofllltfvauwhv.supabase.co', 
         port: '',
         pathname: '/storage/v1/object/public/**',
       },
