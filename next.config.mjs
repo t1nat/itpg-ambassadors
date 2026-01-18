@@ -10,6 +10,12 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'drive.google.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'zpxvpyvuzonscofvclon.supabase.co', // Extract this from your Supabase URL
+        port: '',
+        pathname: '/storage/v1/object/public/**',
+      },
     ],
   },
 }
