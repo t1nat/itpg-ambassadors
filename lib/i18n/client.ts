@@ -1,6 +1,8 @@
-import { useEffect } from 'react'
+// @/lib/i18n/client.ts
 import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
+
+// Импортите ти на JSON файловете остават същите
 import bgCommon from '../../public/locales/bg/common.json'
 import enCommon from '../../public/locales/en/common.json'
 import deCommon from '../../public/locales/de/common.json'
@@ -37,6 +39,24 @@ export const resources = {
   me: { common: meCommon },
 }
 
-export const useI18n = () => {
-  // Init is done in language-switcher
+// ИНИЦИАЛИЗАЦИЯ (Преместена тук от компонентите)
+if (!i18next.isInitialized) {
+  i18next
+    .use(initReactI18next) // ТОВА СВЪРЗВА I18NEXT С REACT
+    .init({
+      resources,
+      lng: 'bg',
+      fallbackLng: 'bg',
+      supportedLngs: ['bg', 'en', 'de', 'fr', 'es', 'it', 'pl', 'ro', 'cs', 'sk', 'sl', 'hr', 'sr', 'mk', 'al', 'me'],
+      defaultNS: 'common',
+      fallbackNS: 'common',
+      interpolation: {
+        escapeValue: false, // React вече защитава от XSS
+      },
+      react: {
+        useSuspense: false // Важно за избягване на сривове при Server-Side Rendering
+      }
+    })
 }
+
+export default i18next;
