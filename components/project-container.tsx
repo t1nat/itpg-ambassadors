@@ -56,10 +56,9 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
   }
 
   return (
-    <div className="relative group border border-gray-200 rounded-2xl p-4 shadow-md bg-white overflow-hidden transition-all duration-300 hover:shadow-xl hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white">
-      <div className="absolute -z-10 top-0 left-0 w-full h-full rounded-2xl opacity-0 group-hover:opacity-20 bg-blue-200 blur-3xl transition-opacity duration-500 pointer-events-none"></div>
+    <div className="relative group overflow-hidden transition-all duration-300">
 
-      <div className="overflow-hidden rounded-xl">
+      <div className="overflow-hidden">
         <img
           src={project.image_url}
           alt={getTranslatedText(project.title)}
@@ -76,8 +75,8 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
         <button
           onClick={handleVote}
           disabled={voted || loading}
-          className={`ml-4 px-3 py-1 rounded-full text-white text-sm font-semibold transition-all duration-500
-            ${voted ? "bg-green-500 scale-105 shadow-md" : "bg-blue-500 hover:bg-blue-600 hover:scale-105"}
+          className={`ml-4 px-3 py-1 text-white text-sm font-semibold transition-all duration-500
+            ${voted ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"}
             ${loading ? "opacity-70 cursor-wait" : ""}`}
         >
           {voted ? t('project.voted', 'Voted ✅') : loading ? t('project.voting', 'Voting...') : t('project.vote', 'Vote')}

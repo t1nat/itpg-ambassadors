@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation"
 export function Footer() {
   const { t } = useTranslation('common')
   const pathname = usePathname()
-  
+
   // Използваме URL за определяне на текущия език за линковете във футъра, ако има такива
   const currentLocale = pathname.split('/')[1] || 'bg'
 
