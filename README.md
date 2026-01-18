@@ -105,3 +105,6 @@ npm start
 ## License
 
 This project is private and proprietary to ITPG.
+
+## todo
+fix navbar translations and project/ambassadors card descriptions, add descriptions
