@@ -43,31 +43,42 @@
     "ambassadors": "Ambasadori",
     "teachers": "Profesori",
     "projects": "Proiecte",
+    "results": "Rezultate",
     "contact": "Contact",
     "rights": "Toate drepturile rezervate"
   },
   "ambassadors": {
-    "title": "Our Ambassadors",
-    "description": "Meet our ambassadors who inspire and lead the way to a better future through their initiatives and engagement.",
-    "noAmbassadors": "No ambassadors found. Please check back later."
+    "title": "Ambasadorii noștri",
+    "description": "Întâlniți ambasadorii noștri care inspiră și conduc calea către un viitor mai bun prin inițiativele și angajamentul lor.",
+    "noAmbassadors": "Nu s-au găsit ambasadori. Vă rugăm să reveniți mai târziu."
   },
   "projects": {
-    "title": "Our Projects",
-    "description": "Explore the wonderful initiatives created by our ambassadors. Vote for your favorite projects!",
-    "noProjects": "No projects found. Please check back later."
+    "title": "Proiectele noastre",
+    "description": "Explorați inițiativele minunate create de ambasadorii noștri. Votați pentru proiectele favorite!",
+    "noProjects": "Nu s-au găsit proiecte. Vă rugăm să reveniți mai târziu."
   },
   "teachers": {
-    "title": "Our Teachers",
-    "description": "The dedicated educators guiding and mentoring our ambassadors through their journey of European cooperation and cultural exchange.",
-    "noTeachers": "No teachers found. Please check back later."
+    "title": "Profesorii noștri",
+    "description": "Educa torii dedicați care ghidează și mentorizează ambasadorii noștri prin călătoria lor de cooperare europeană și schimb cultural.",
+    "noTeachers": "Nu s-au găsit profesori. Vă rugăm să reveniți mai târziu."
   },
   "project": {
-    "voted": "Voted ✅",
-    "voting": "Voting...",
-    "vote": "Vote",
-    "showLess": "Show Less ▲",
-    "readMore": "Read More ▼",
-    "voteError": "Failed to vote. Try again."
+    "voted": "Votat ✅",
+    "voting": "Se votează...",
+    "vote": "Votează",
+    "showLess": "Arată mai puțin ▲",
+    "readMore": "Citește mai mult ▼",
+    "voteError": "Votarea a eșuat. Încearcă din nou."
+  },
+  "results": {
+    "title": "Rezultatele votării",
+    "description": "Vezi ce proiecte conduc votul! Total voturi exprimate:",
+    "firstPlace": "Locul 1",
+    "secondPlace": "Locul 2",
+    "thirdPlace": "Locul 3",
+    "vote": "vot",
+    "votes": "voturi",
+    "noResults": "Încă nu sunt disponibile rezultatele votării."
   },
   "loading": "Loading...",
   "language": "Limbă"

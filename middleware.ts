@@ -7,26 +7,24 @@ const defaultLocale = 'bg'
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Check if the pathname starts with a locale
-  const pathnameHasLocale = locales.some(locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`)
-
-  if (pathnameHasLocale) {
-    // Path already has locale, continue
+  if (pathname.includes('.') || pathname.startsWith('/_next') || pathname.startsWith('/api')) {
     return NextResponse.next()
   }
 
-  // Path doesn't have locale, redirect to default locale
-  if (pathname === '/') {
-    return NextResponse.redirect(new URL(`/${defaultLocale}`, request.url))
-  }
+  const pathnameHasLocale = locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  )
 
-  // For other paths, redirect to default locale + path
-  return NextResponse.redirect(new URL(`/${defaultLocale}${pathname}`, request.url))
+  if (pathnameHasLocale) return NextResponse.next()
+
+  // ПРОМЯНА: Вземи записания език от бисквитката, ако съществува
+  const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value
+  const locale = locales.includes(cookieLocale || '') ? cookieLocale : defaultLocale
+
+  const url = new URL(`/${locale}${pathname}`, request.url)
+  return NextResponse.redirect(url)
 }
 
 export const config = {
-  matcher: [
-    // Skip all internal paths (_next)
-    '/((?!_next).*)',
-  ],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)'],
 }

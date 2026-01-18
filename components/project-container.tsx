@@ -3,12 +3,11 @@
 import { useState } from "react"
 import { useTranslation } from 'react-i18next'
 
-// Интерфейсът Project е същият
 export interface Project {
   id: number
-  title: string
-  short_description: string
-  long_description: string
+  title: any // Changed to any to handle JSON
+  short_description: any 
+  long_description: any
   image_url: string
   extra_images: string[]
 }
@@ -18,24 +17,30 @@ interface ProjectContainerProps {
 }
 
 export function ProjectContainer({ project }: ProjectContainerProps) {
-  const { t } = useTranslation('common')
+  const { t, i18n } = useTranslation('common')
   const [voted, setVoted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
-  // Състояние за управление на разширяването/свиването на описанието
   const [expanded, setExpanded] = useState(false) 
+
+  // Helper to pick the correct language from JSON
+  const getTranslatedText = (field: any) => {
+    const lang = i18n.language || 'bg'
+    if (field && typeof field === 'object') {
+      return field[lang] || field['bg'] || Object.values(field)[0]
+    }
+    return field // Fallback if it's still a string
+  }
 
   async function handleVote() {
     setLoading(true)
     setError("")
-
     try {
       const res = await fetch("/api/vote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ projectId: project.id }),
       })
-
       const data = await res.json()
       if (!res.ok) {
         setError(data.error || "Something went wrong")
@@ -50,30 +55,23 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
   }
 
   return (
-    // Използваме един контейнер
     <div className="relative group border border-gray-200 rounded-2xl p-4 shadow-md bg-white overflow-hidden transition-all duration-300 hover:shadow-xl hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white">
-      {/* Glow hover effect */}
       <div className="absolute -z-10 top-0 left-0 w-full h-full rounded-2xl opacity-0 group-hover:opacity-20 bg-blue-200 blur-3xl transition-opacity duration-500 pointer-events-none"></div>
 
-      {/* Project Image */}
-      {/* Премахваме onClick, ако не искаш кликването върху снимката да разширява */}
       <div className="overflow-hidden rounded-xl">
         <img
           src={project.image_url}
-          alt={project.title}
+          alt={getTranslatedText(project.title)}
           className="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
-      {/* Project Info */}
       <div className="mt-4 flex justify-between items-center">
-        <div>
-          <h2 className="text-xl font-bold text-gray-900">{project.title}</h2>
-          {/* Краткото описание винаги се показва */}
-          <p className="text-sm text-gray-600">{project.short_description}</p>
+        <div className="flex-1">
+          <h2 className="text-xl font-bold text-gray-900">{getTranslatedText(project.title)}</h2>
+          <p className="text-sm text-gray-600">{getTranslatedText(project.short_description)}</p>
         </div>
 
-        {/* Vote Button */}
         <button
           onClick={handleVote}
           disabled={voted || loading}
@@ -85,14 +83,12 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
         </button>
       </div>
 
-      {/* Long Description (показва се само ако expanded е true) */}
       {expanded && (
         <div className="mt-4 text-gray-700 whitespace-pre-line animate-fadeIn border-t border-gray-100 pt-3">
-          {project.long_description}
+          {getTranslatedText(project.long_description)}
         </div>
       )}
 
-      {/* Toggle button - за превключване на long_description */}
       <div className="mt-3 text-right">
         <button
           onClick={() => setExpanded(!expanded)}
@@ -102,7 +98,6 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
         </button>
       </div>
 
-      {/* Error Message */}
       {error && (
         <p className="mt-2 text-xs text-red-500 animate-pulse">{error}</p>
       )}

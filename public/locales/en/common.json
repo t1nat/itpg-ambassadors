@@ -49,7 +49,23 @@
   "ambassadors": {
     "title": "Our Ambassadors",
     "description": "Meet our ambassadors who inspire and lead the way to a better future through their initiatives and engagement.",
-    "noAmbassadors": "No ambassadors found. Please check back later."
+    "noAmbassadors": "No ambassadors found. Please check back later.",
+    "bios": {
+      "Aleksandar Karadjov": "Dedicated ambassador passionate about cultural exchange and community projects.",
+      "Aleksandra Kostova": "Committed to educational initiatives and youth leadership development.",
+      "Daniel Kolev": "Enthusiastic about environmental sustainability and green initiatives.",
+      "Georgi Pazhev": "Focused on digital innovation and technology in education.",
+      "Ivanina Pavlova": "Young ambassador with passion for cultural heritage and traditional arts.",
+      "Kiril Kalachev": "Dedicated to promoting intercultural dialogue and understanding.",
+      "Magdalena Ivanova": "Committed to social justice and community service projects.",
+      "Maksim Akimov": "Passionate about STEM education and scientific innovation.",
+      "Maksim Ralev": "Focused on sports, health, and active lifestyle promotion.",
+      "Plamena Gospodinova": "Dedicated to arts, creativity, and cultural expression.",
+      "Simeon Sabev": "Committed to humanitarian causes and global citizenship.",
+      "Tina Tuncheva": "Leader in European integration projects and international cooperation.",
+      "Valeri Yankova": "Enthusiastic about language learning and multilingual communication.",
+      "Vasilena Veselinova": "Dedicated to environmental protection and sustainable development."
+    }
   },
   "projects": {
     "title": "Our Projects",

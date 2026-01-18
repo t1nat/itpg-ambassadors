@@ -6,20 +6,6 @@ import { useTranslation } from 'react-i18next'
 import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import { resources } from '@/lib/i18n/client'
-
-// Initialize i18n synchronously
-if (!i18next.isInitialized) {
-  i18next
-    .use(initReactI18next)
-    .init({
-      resources,
-      lng: 'bg',
-      fallbackLng: 'bg',
-      supportedLngs: ['bg', 'en', 'de', 'fr', 'es', 'it', 'pl', 'ro', 'cs', 'sk', 'sl', 'hr', 'sr', 'mk', 'al', 'me'],
-      defaultNS: 'common',
-      fallbackNS: 'common'
-    })
-}
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -28,6 +14,19 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Globe } from 'lucide-react'
+
+if (!i18next.isInitialized) {
+  i18next
+    .use(initReactI18next)
+    .init({
+      resources,
+      fallbackLng: 'bg',
+      supportedLngs: ['bg', 'en', 'de', 'fr', 'es', 'it', 'pl', 'ro', 'cs', 'sk', 'sl', 'hr', 'sr', 'mk', 'al', 'me'],
+      defaultNS: 'common',
+      fallbackNS: 'common',
+      interpolation: { escapeValue: false }
+    })
+}
 
 const languages = [
   { code: 'bg', name: 'Български', flag: '🇧🇬' },
@@ -52,33 +51,32 @@ export function LanguageSwitcher() {
   const [mounted, setMounted] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
-  const { t, i18n } = useTranslation('common')
-
+  const { i18n } = useTranslation('common')
   const currentLocale = pathname.split('/')[1] || 'bg'
 
   useEffect(() => {
-    i18n.changeLanguage(currentLocale)
     setMounted(true)
-  }, [i18n, currentLocale])
+    if (i18n.language !== currentLocale) {
+      i18n.changeLanguage(currentLocale)
+    }
+  }, [currentLocale, i18n])
 
   const handleLanguageChange = (locale: string) => {
-    if (mounted) {
-      const segments = pathname.split('/')
-      segments[1] = locale
-      const newPath = segments.join('/') || '/'
-      router.push(newPath)
-    }
+    // ПРОМЯНА: Записваме бисквитката за Middleware
+    document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;
+    
+    const segments = pathname.split('/')
+    segments[1] = locale
+    const newPath = segments.join('/') || '/'
+    
+    i18n.changeLanguage(locale)
+    router.push(newPath)
   }
 
-  const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0]
+  const currentLanguage = languages.find(lang => lang.code === currentLocale) || languages[0]
 
   if (!mounted) {
-    // Return a placeholder during SSR
-    return (
-      <Button variant="ghost" size="sm" className="gap-2 opacity-0">
-        <Globe className="h-4 w-4" />
-      </Button>
-    )
+    return <Button variant="ghost" size="sm" className="gap-2 opacity-0"><Globe className="h-4 w-4" /></Button>
   }
 
   return (
@@ -90,12 +88,12 @@ export function LanguageSwitcher() {
           <span className="hidden md:inline">{currentLanguage.name}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48">
+      <DropdownMenuContent align="end" className="w-48 max-h-[400px] overflow-y-auto bg-white">
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.code}
             onClick={() => handleLanguageChange(language.code)}
-            className={`gap-2 ${i18n.language === language.code ? 'bg-accent' : ''}`}
+            className={`gap-2 cursor-pointer ${currentLocale === language.code ? 'bg-gray-100' : ''}`}
           >
             <span>{language.flag}</span>
             <span>{language.name}</span>

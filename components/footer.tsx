@@ -2,45 +2,36 @@
 
 import Link from "next/link"
 import { useTranslation } from 'react-i18next'
+import { usePathname } from "next/navigation"
 
 export function Footer() {
   const { t } = useTranslation('common')
+  const pathname = usePathname()
+  
+  // Използваме URL за определяне на текущия език за линковете във футъра, ако има такива
+  const currentLocale = pathname.split('/')[1] || 'bg'
 
   return (
-    <footer className="border-t bg-muted/50">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid gap-8 md:grid-cols-3">
+    <footer className="border-t border-white/10 bg-slate-900/50 backdrop-blur-xl">
+      <div className="container mx-auto px-6 py-12">
+        <div className="grid gap-8 md:grid-cols-2">
           <div>
-            <h3 className="mb-4 text-lg font-semibold">{t('footer.title')}</h3>
-            <p className="text-sm text-muted-foreground">
+            <h3 className="mb-4 text-lg font-semibold text-white">{t('footer.title')}</h3>
+            <p className="text-sm text-blue-100">
               {t('footer.description')}
             </p>
           </div>
           <div>
-            <h3 className="mb-4 text-lg font-semibold">{t('footer.quickLinks')}</h3>
-            <div className="flex flex-col gap-2 text-sm">
-              <Link href="/ambassadors" className="text-muted-foreground hover:text-primary">
-                {t('footer.ambassadors')}
-              </Link>
-              <Link href="/teachers" className="text-muted-foreground hover:text-primary">
-                {t('footer.teachers')}
-              </Link>
-              <Link href="/projects" className="text-muted-foreground hover:text-primary">
-                {t('footer.projects')}
-              </Link>
-            </div>
-          </div>
-          <div>
-            <h3 className="mb-4 text-lg font-semibold">{t('footer.contact')}</h3>
-            <p className="text-sm text-muted-foreground">
-              Instituto Técnico Profissional de Gestão
+            <h3 className="mb-4 text-lg font-semibold text-white">{t('footer.contact')}</h3>
+            <p className="text-sm text-blue-100">
+              ITPG Ambassadors
               <br />
               ambassadors@itpg.edu
             </p>
           </div>
         </div>
-        <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} {t('footer.title')}. {t('footer.rights')}</p>
+        <div className="mt-8 border-t border-white/10 pt-8 text-center text-sm text-blue-100">
+          <p>&copy; {new Date().getFullYear()} {t('footer.title', 'ITPG Ambassadors')}. {t('footer.rights', 'All rights reserved.')}</p>
         </div>
       </div>
     </footer>

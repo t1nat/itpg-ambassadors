@@ -40,31 +40,45 @@
     "title": "Velvyslanci ITPG",
     "description": "Podpora evropských hodnot a mezinárodní spolupráce prostřednictvím iniciativ vedených studenty.",
     "quickLinks": "Rychlé odkazy",
+    "ambassadors": "Velvyslanci",
+    "teachers": "Učitelé",
+    "projects": "Projekty",
+    "results": "Výsledky",
     "contact": "Kontakt",
     "rights": "Všechna práva vyhrazena"
   },
   "ambassadors": {
-    "title": "Our Ambassadors",
-    "description": "Meet our ambassadors who inspire and lead the way to a better future through their initiatives and engagement.",
-    "noAmbassadors": "No ambassadors found. Please check back later."
+    "title": "Naši velvyslanci",
+    "description": "Seznamte se s našimi velvyslanci, kteří inspirují a vedou cestu k lepší budoucnosti prostřednictvím svých iniciativ a angažovanosti.",
+    "noAmbassadors": "Nebyli nalezeni žádní velvyslanci. Zkuste to prosím později."
   },
   "projects": {
-    "title": "Our Projects",
-    "description": "Explore the wonderful initiatives created by our ambassadors. Vote for your favorite projects!",
-    "noProjects": "No projects found. Please check back later."
+    "title": "Naše projekty",
+    "description": "Prozkoumejte úžasné iniciativy vytvořené našimi velvyslanci. Hlasujte pro své oblíbené projekty!",
+    "noProjects": "Nebyly nalezeny žádné projekty. Zkuste to prosím později."
   },
   "teachers": {
-    "title": "Our Teachers",
-    "description": "The dedicated educators guiding and mentoring our ambassadors through their journey of European cooperation and cultural exchange.",
-    "noTeachers": "No teachers found. Please check back later."
+    "title": "Naši učitelé",
+    "description": "Věnovaní pedagogové vedoucí a mentorující naše velvyslanec v jejich cestě evropské spolupráce a kulturní výměny.",
+    "noTeachers": "Nebyli nalezeni žádní učitelé. Zkuste to prosím později."
   },
   "project": {
-    "voted": "Voted ✅",
-    "voting": "Voting...",
-    "vote": "Vote",
-    "showLess": "Show Less ▲",
-    "readMore": "Read More ▼",
-    "voteError": "Failed to vote. Try again."
+    "voted": "Hlasováno ✅",
+    "voting": "Hlasování...",
+    "vote": "Hlasovat",
+    "showLess": "Zobrazit méně ▲",
+    "readMore": "Přečíst více ▼",
+    "voteError": "Hlasování se nezdařilo. Zkuste to znovu."
+  },
+  "results": {
+    "title": "Výsledky hlasování",
+    "description": "Podívejte se, které projekty vedou v hlasování! Celkově odevzdané hlasy:",
+    "firstPlace": "1. místo",
+    "secondPlace": "2. místo",
+    "thirdPlace": "3. místo",
+    "vote": "hlas",
+    "votes": "hlasy",
+    "noResults": "Zatím nejsou k dispozici žádné výsledky hlasování."
   },
   "loading": "Loading...",
   "language": "Jazyk"

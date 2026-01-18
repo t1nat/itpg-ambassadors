@@ -43,32 +43,43 @@
     "ambassadors": "Veľvyslanci",
     "teachers": "Učitelia",
     "projects": "Projekty",
+    "results": "Výsledky",
     "contact": "Kontakt",
     "rights": "Všetky práva vyhradené"
   },
   "ambassadors": {
-    "title": "Our Ambassadors",
-    "description": "Meet our ambassadors who inspire and lead the way to a better future through their initiatives and engagement.",
-    "noAmbassadors": "No ambassadors found. Please check back later."
+    "title": "Naši veľvyslanci",
+    "description": "Zoznámte sa s našimi veľvyslanci, ktorí inšpirujú a vedú cestu k lepšej budúcnosti prostredníctvom svojich iniciatív a angažovanosti.",
+    "noAmbassadors": "Nenašli sa žiadni veľvyslanci. Skúste to prosím neskôr."
   },
   "projects": {
-    "title": "Our Projects",
-    "description": "Explore the wonderful initiatives created by our ambassadors. Vote for your favorite projects!",
-    "noProjects": "No projects found. Please check back later."
+    "title": "Naše projekty",
+    "description": "Preskúmajte úžasné iniciatívy vytvorené našimi veľvyslanci. Hlasujte za svoje obľúbené projekty!",
+    "noProjects": "Nenašli sa žiadne projekty. Skúste to prosím neskôr."
   },
   "teachers": {
-    "title": "Our Teachers",
-    "description": "The dedicated educators guiding and mentoring our ambassadors through their journey of European cooperation and cultural exchange.",
-    "noTeachers": "No teachers found. Please check back later."
+    "title": "Naši učitelia",
+    "description": "Oddaní pedagógovia vedú a mentorujú našich veľvyslancov počas ich cesty európskej spolupráce a kultúrnej výmeny.",
+    "noTeachers": "Nenašli sa žiadni učitelia. Skúste to prosím neskôr."
   },
   "project": {
-    "voted": "Voted ✅",
-    "voting": "Voting...",
-    "vote": "Vote",
-    "showLess": "Show Less ▲",
-    "readMore": "Read More ▼",
-    "voteError": "Failed to vote. Try again."
+    "voted": "Hlasované ✅",
+    "voting": "Hlasovanie...",
+    "vote": "Hlasovať",
+    "showLess": "Zobraziť menej ▲",
+    "readMore": "Čítaj viac ▼",
+    "voteError": "Hlasovanie zlyhalo. Skúste znovu."
   },
-  "loading": "Loading...",
+  "results": {
+    "title": "Výsledky hlasovania",
+    "description": "Pozrite si, ktoré projekty vedú v hlasovaní! Celkovo odovzdaných hlasov:",
+    "firstPlace": "1. miesto",
+    "secondPlace": "2. miesto",
+    "thirdPlace": "3. miesto",
+    "vote": "hlas",
+    "votes": "hlasy",
+    "noResults": "Zatiaľ nie sú k dispozícii žiadne výsledky hlasovania."
+  },
+  "loading": "Načítanie...",
   "language": "Jazyk"
 }

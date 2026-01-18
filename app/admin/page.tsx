@@ -8,6 +8,9 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function AdminPage() {
+  const [authenticated, setAuthenticated] = useState(false)
+  const [password, setPassword] = useState("")
+  const [authError, setAuthError] = useState("")
   const [formData, setFormData] = useState({
     title: "",
     short_description: "",
@@ -18,6 +21,16 @@ export default function AdminPage() {
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [uploading, setUploading] = useState(false)
   const [message, setMessage] = useState("")
+
+  const handleAuth = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (password === "admin123") { // Change to your desired password
+      setAuthenticated(true)
+      setAuthError("")
+    } else {
+      setAuthError("Incorrect password")
+    }
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -86,6 +99,36 @@ export default function AdminPage() {
     } finally {
       setUploading(false)
     }
+  }
+
+  if (!authenticated) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <div className="max-w-md mx-auto">
+          <Card>
+            <CardHeader>
+              <CardTitle>Admin Access</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleAuth} className="space-y-4">
+                <div>
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <Button type="submit">Login</Button>
+                {authError && <p className="text-sm text-red-500">{authError}</p>}
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    )
   }
 
   return (
