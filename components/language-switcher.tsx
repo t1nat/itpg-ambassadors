@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
-// ВАЖНО: Импортираме файла, в който е инициализацията
+// 1. Вземаме директната инстанция на i18next
+import i18nInstance from 'i18next' 
 import '@/lib/i18n/client' 
 import { Button } from '@/components/ui/button'
 import {
@@ -38,45 +39,45 @@ export function LanguageSwitcher() {
   const router = useRouter()
   const pathname = usePathname()
   
-  // useTranslation вече работи, защото инициализацията е в @/lib/i18n/client
-  const { i18n } = useTranslation('common')
+  // 2. Взимаме само 't', за да не гърми, ако i18n от контекста е празен
+  const { t } = useTranslation('common')
   
   const currentLocale = pathname.split('/')[1] || 'bg'
 
   useEffect(() => {
     setMounted(true)
-    // Синхронизираме езика на i18next с URL адреса при зареждане
-    if (i18n.language !== currentLocale) {
-      i18n.changeLanguage(currentLocale)
+    
+    // 3. Синхронизация при зареждане
+    if (i18nInstance.language !== currentLocale) {
+      i18nInstance.changeLanguage(currentLocale);
     }
-  }, [currentLocale, i18n])
+  }, [currentLocale])
 
   const handleLanguageChange = async (locale: string) => {
-    // 1. Записваме бисквитка за Middleware
+    // 4. Записваме бисквитка (за Middleware)
     document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;
     
-    // 2. Сменяме езика в i18next
-    if (i18n.changeLanguage) {
-      await i18n.changeLanguage(locale);
-    }
-    
-    // 3. Пренасочваме към новия URL
+    // 5. Генерираме новия път
     const segments = pathname.split('/')
     segments[1] = locale
     const newPath = segments.join('/')
-    router.push(newPath)
+
+    // 6. Смяна на езика
+    try {
+      await i18nInstance.changeLanguage(locale);
+    } catch (error) {
+      console.error("i18next fallback: could not change language programmatically", error);
+    }
+    
+    // 7. Пренасочваме. Дори стъпка 6 да се забави, 
+    // пренасочването ще зареди новия език чрез Middleware и Refresh.
+    router.push(newPath);
   }
 
   const currentLanguage = languages.find(lang => lang.code === currentLocale) || languages[0]
 
-  // Предотвратява Hydration грешки (Content mismatch)
   if (!mounted) {
-    return (
-      <Button variant="ghost" size="sm" className="gap-2">
-        <Globe className="h-4 w-4" />
-        <span className="w-4 h-4" />
-      </Button>
-    )
+    return <div className="w-10 h-10" />
   }
 
   return (
@@ -104,4 +105,4 @@ export function LanguageSwitcher() {
       </DropdownMenuContent>
     </DropdownMenu>
   )
-}  
+}
