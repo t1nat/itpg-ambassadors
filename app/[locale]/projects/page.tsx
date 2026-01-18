@@ -71,12 +71,13 @@ export default function ProjectsPage() {
   }
 
   return (
-    <motion.div
-      className="container mx-auto px-4 py-12"
-      initial="hidden"
-      animate="visible"
-      variants={container}
-    >
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <motion.div
+        className="container mx-auto px-4 py-12"
+        initial="hidden"
+        animate="visible"
+        variants={container}
+      >
       <motion.div className="mb-12 text-center" variants={item}>
         <motion.h1 className="mb-4 text-4xl font-bold" variants={item}>{t('projects.title', 'Our Projects')}</motion.h1>
         <motion.p className="mx-auto max-w-2xl text-balance text-lg text-muted-foreground" variants={item}>
@@ -98,5 +99,6 @@ export default function ProjectsPage() {
         ))}
       </motion.div>
     </motion.div>
+    </div>
   )
 }

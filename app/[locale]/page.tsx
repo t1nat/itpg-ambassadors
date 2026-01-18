@@ -13,8 +13,18 @@ import { AnimatedBackground } from "@/components/animations/animated-background"
 import { AnimatedCounter } from "@/components/animations/animated-counter"
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.6 } },
+}
+
+const slideFromLeft = {
+  hidden: { opacity: 0, x: -50, filter: "blur(10px)" },
+  visible: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.6 } },
+}
+
+const slideFromRight = {
+  hidden: { opacity: 0, x: 50, filter: "blur(10px)" },
+  visible: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.6 } },
 }
 
 const wordAnimation = {
@@ -116,12 +126,12 @@ export default function HomePage() {
       {/* Stats Section */}
       <section className="py-20 relative z-10">
         <div className="container mx-auto px-4">
-          <motion.div 
+          <motion.div
             className="grid gap-8 md:grid-cols-4"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ amount: 0.3 }}
           >
             {stats.map((stat, i) => (
               <motion.div
@@ -143,24 +153,34 @@ export default function HomePage() {
       {/* Features Section */}
       <section className="py-24 relative z-10">
         <div className="container mx-auto px-4">
-          <div className="mb-16 text-center">
+          <motion.div
+            className="mb-16 text-center"
+            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-4xl md:text-5xl font-bold text-black mb-6 bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent">
               {t('features.title')}
             </h2>
             <p className="text-xl text-black max-w-2xl mx-auto leading-relaxed">
               {t('features.subtitle')}
             </p>
-          </div>
+          </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid gap-8 md:grid-cols-2 lg:grid-cols-4"
-            variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ amount: 0.3 }}
+            variants={staggerContainer}
           >
             {features.map((feature, i) => (
-              <motion.div key={i} variants={fadeUp}>
+              <motion.div
+                key={i}
+                variants={i < 2 ? slideFromLeft : slideFromRight}
+                transition={{ delay: i * 0.2 }}
+              >
                 <Card className="group relative rounded-3xl shadow-lg transition-all duration-500 hover:scale-105 bg-white border border-gray-200 overflow-hidden h-full">
                   <CardContent className="pt-8">
                     <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-100 to-teal-100 border border-blue-200 mx-auto">
@@ -178,18 +198,37 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section - Background, border, and animations removed */}
+      {/* CTA Section */}
       <section className="relative py-32 text-center z-10">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent"
+            initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+          >
             {t('cta.title')}
-          </h2>
-          <p className="mb-10 text-xl text-black max-w-3xl mx-auto leading-relaxed">
+          </motion.h2>
+          <motion.p
+            className="mb-10 text-xl text-black max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             {t('cta.subtitle')}
-          </p>
-          <Button asChild size="lg">
-            <Link href={`/${currentLocale}/projects`}>{t('cta.voteNow')}</Link>
-          </Button>
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            viewport={{ amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <Button asChild size="lg">
+              <Link href={`/${currentLocale}/projects`}>{t('cta.voteNow')}</Link>
+            </Button>
+          </motion.div>
         </div>
       </section>
     </div>

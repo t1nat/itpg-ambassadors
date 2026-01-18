@@ -29,7 +29,7 @@ export default function AmbassadorsPage() {
       if (error) {
         console.error("Error fetching ambassadors:", error)
       } else {
-        setAmbassadors(data || [])
+        setAmbassadors((data || []).sort((a, b) => a.name.localeCompare(b.name)))
       }
       setLoading(false)
     }
@@ -60,12 +60,13 @@ export default function AmbassadorsPage() {
   }
 
   return (
-    <motion.div
-      className="container mx-auto px-4 py-12"
-      initial="hidden"
-      animate="visible"
-      variants={container}
-    >
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+      <motion.div
+        className="container mx-auto px-4 py-12"
+        initial="hidden"
+        animate="visible"
+        variants={container}
+      >
       <motion.div className="mb-12 text-center" variants={item}>
         <motion.h1 className="mb-4 text-4xl font-bold" variants={item}>{t('ambassadors.title', 'Our Ambassadors')}</motion.h1>
         <motion.p className="mx-auto max-w-2xl text-balance text-lg text-muted-foreground" variants={item}>
@@ -81,25 +82,43 @@ export default function AmbassadorsPage() {
         viewport={{ once: true }}
       >
         {ambassadors.map((ambassador) => (
-          <motion.div key={ambassador.id} variants={item}>
-            <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
-              <div className="relative aspect-square">
+          <motion.div
+            key={ambassador.id}
+            variants={item}
+            whileHover={{ y: -10 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <Card className="overflow-hidden hover:shadow-2xl transition-all duration-500 bg-white/80 backdrop-blur-sm border-0 group rounded-3xl">
+              <div className="relative aspect-square overflow-hidden rounded-t-3xl">
                 <Image
                   src={ambassador.image_url || "/placeholder.svg"}
                   alt={ambassador.name}
                   fill
-                  className="object-cover transition-transform duration-300 hover:scale-105"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-semibold mb-2">{ambassador.name}</h3>
+              <CardContent className="pt-6 px-6 pb-6">
+                <motion.h3
+                  className="text-2xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  {ambassador.name}
+                </motion.h3>
                 {ambassador.bio && (
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <motion.p
+                    className="text-muted-foreground leading-relaxed text-sm"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
                     {/* Dynamic translation from JSONB or static key fallback */}
                     {typeof ambassador.bio === 'object'
                       ? (ambassador.bio[currentLang] || ambassador.bio['bg'])
                       : t(`ambassadors.bios.${ambassador.name}`, ambassador.bio)}
-                  </p>
+                  </motion.p>
                 )}
               </CardContent>
             </Card>
@@ -107,5 +126,6 @@ export default function AmbassadorsPage() {
         ))}
       </motion.div>
     </motion.div>
+    </div>
   )
 }
