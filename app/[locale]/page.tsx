@@ -12,40 +12,36 @@ import { usePathname } from 'next/navigation'
 import { AnimatedBackground } from "@/components/animations/animated-background"
 import { AnimatedCounter } from "@/components/animations/animated-counter"
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.6 } },
-}
-
-const slideFromLeft = {
-  hidden: { opacity: 0, x: -50, filter: "blur(10px)" },
-  visible: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.6 } },
-}
-
-const slideFromRight = {
-  hidden: { opacity: 0, x: 50, filter: "blur(10px)" },
-  visible: { opacity: 1, x: 0, filter: "blur(0px)", transition: { duration: 0.6 } },
-}
-
-const wordAnimation = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 }
-}
-
-const staggerContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-}
-
 export default function HomePage() {
   const { t, i18n } = useTranslation('common')
   const pathname = usePathname()
   const [mounted, setMounted] = useState(false)
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 20, filter: "blur(10px)" },
+    visible: { opacity: 1, y: 0, filter: "blur(0px)" }
+  }
+
+  const slideFromLeft = {
+    hidden: { opacity: 0, x: -50, filter: "blur(10px)" },
+    visible: { opacity: 1, x: 0, filter: "blur(0px)" }
+  }
+
+  const slideFromRight = {
+    hidden: { opacity: 0, x: 50, filter: "blur(10px)" },
+    visible: { opacity: 1, x: 0, filter: "blur(0px)" }
+  }
+
+  const staggerContainer = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.15 } },
+  }
+
   const currentLocale = pathname.split('/')[1] || 'bg'
 
   useEffect(() => {
     setMounted(true)
+    window.scrollTo(0, 0)
     if (i18n.language !== currentLocale) {
       i18n.changeLanguage(currentLocale)
     }
@@ -67,24 +63,21 @@ export default function HomePage() {
     { icon: <Award className="h-6 w-6 text-[#306FEC]" />, title: t('features.sustainability'), description: t('features.sustainabilityDesc') },
   ]
 
+  const heroTitleWords = t('hero.title').split(' ')
+
   return (
     <div className="flex flex-col min-h-screen bg-white font-sans relative overflow-hidden">
       <AnimatedBackground />
 
       {/* Hero Section */}
-      <motion.section
-        className="relative py-32 px-6 flex flex-col items-center text-center z-10"
-        initial="hidden"
-        animate="visible"
-        variants={fadeUp}
-      >
+      <section className="relative py-32 px-6 flex flex-col items-center text-center z-10">
         <motion.h1
           className="text-6xl md:text-7xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          {t('hero.title').split(' ').map((word, i) => (
+          {heroTitleWords.map((word, i) => (
             <motion.span
               key={i}
               className="inline-block mr-4"
@@ -100,6 +93,7 @@ export default function HomePage() {
             </motion.span>
           ))}
         </motion.h1>
+        
         <motion.p
           className="text-xl md:text-2xl text-black mb-12 max-w-3xl leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
@@ -108,6 +102,7 @@ export default function HomePage() {
         >
           {t('hero.subtitle')}
         </motion.p>
+        
         <motion.div
           className="flex flex-wrap gap-6 justify-center"
           initial={{ opacity: 0, y: 20 }}
@@ -121,7 +116,7 @@ export default function HomePage() {
             <Link href={`/${currentLocale}/ambassadors`}>{t('hero.meetTeam')}</Link>
           </Button>
         </motion.div>
-      </motion.section>
+      </section>
 
       {/* Stats Section */}
       <section className="py-20 relative z-10">
@@ -131,13 +126,14 @@ export default function HomePage() {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3, margin: "100px" }}
           >
             {stats.map((stat, i) => (
               <motion.div
                 key={i}
                 className="group relative rounded-3xl p-8 text-center bg-white border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105"
                 variants={fadeUp}
+                viewport={{ once: false, amount: 0.3 }}
               >
                 <div className="text-5xl font-bold mb-3 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
                   <AnimatedCounter from={0} to={parseInt(stat.number.replace('+', ''))} />
@@ -155,10 +151,10 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <motion.div
             className="mb-16 text-center"
-            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ amount: 0.3 }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3, margin: "100px" }}
+            variants={fadeUp}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-black mb-6 bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent">
               {t('features.title')}
@@ -172,14 +168,15 @@ export default function HomePage() {
             className="grid gap-8 md:grid-cols-2 lg:grid-cols-4"
             initial="hidden"
             whileInView="visible"
-            viewport={{ amount: 0.3 }}
+            viewport={{ once: false, amount: 0.1, margin: "50px" }}
             variants={staggerContainer}
           >
             {features.map((feature, i) => (
               <motion.div
                 key={i}
                 variants={i < 2 ? slideFromLeft : slideFromRight}
-                transition={{ delay: i * 0.2 }}
+                viewport={{ once: false, amount: 0.1 }}
+                transition={{ duration: 0.6 }}
               >
                 <Card className="group relative rounded-3xl shadow-lg transition-all duration-500 hover:scale-105 bg-white border border-gray-200 overflow-hidden h-full">
                   <CardContent className="pt-8">
@@ -203,27 +200,31 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <motion.h2
             className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent"
-            initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ amount: 0.3 }}
-            transition={{ duration: 0.8 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3, margin: "100px" }}
+            variants={fadeUp}
           >
             {t('cta.title')}
           </motion.h2>
+          
           <motion.p
             className="mb-10 text-xl text-black max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            viewport={{ amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3, margin: "100px" }}
+            variants={fadeUp}
+            transition={{ delay: 0.2 }}
           >
             {t('cta.subtitle')}
           </motion.p>
+          
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            viewport={{ amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.3, margin: "100px" }}
+            variants={fadeUp}
+            transition={{ delay: 0.4 }}
           >
             <Button asChild size="lg">
               <Link href={`/${currentLocale}/projects`}>{t('cta.voteNow')}</Link>

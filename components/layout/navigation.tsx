@@ -1,6 +1,6 @@
 "use client"
 
-import '@/lib/i18n/client' // Initialize i18n before useTranslation
+import '@/lib/i18n/client'
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -25,7 +25,6 @@ export function Navigation() {
     }
   }, [currentLocale, i18n])
 
-  // Ако не е заредил клиента, не показваме навигацията, за да няма грешни преводи
   if (!mounted) return <div className="h-16 bg-white/80 border-b" />
 
   const links = [

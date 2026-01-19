@@ -13,14 +13,13 @@ export function CustomCursor() {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX - 16) // 16 is half of 32px (cursor size)
+      mouseX.set(e.clientX - 16)
       mouseY.set(e.clientY - 16)
     }
 
     const handleMouseEnter = () => setIsHovered(true)
     const handleMouseLeave = () => setIsHovered(false)
 
-    // Add event listeners to interactive elements
     const interactiveElements = document.querySelectorAll('button, a, [role="button"], input, textarea')
     interactiveElements.forEach(el => {
       el.addEventListener('mouseenter', handleMouseEnter)

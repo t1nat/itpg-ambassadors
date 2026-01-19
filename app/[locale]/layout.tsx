@@ -1,5 +1,3 @@
-// app/[locale]/layout.tsx
-
 import { Geist, Geist_Mono } from "next/font/google"
 import { Navigation } from "@/components/layout/navigation"
 import { Footer } from "@/components/layout/footer"
@@ -19,12 +17,10 @@ const geistMono = Geist_Mono({
 
 interface RootLayoutProps {
   children: React.ReactNode;
-  // ПРОМЯНА: Правим locale незадължителен с '?'
   params: Promise<{ locale?: string }>;
 }
 
 export default async function RootLayout({ children, params }: RootLayoutProps) {
-  // ПРОМЯНА: Даваме стойност по подразбиране 'bg', ако locale липсва
   const resolvedParams = await params;
   const locale = resolvedParams?.locale || 'bg';
 
@@ -34,7 +30,6 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
         <CustomCursor />
         <ScrollProgress />
         <div className="flex min-h-screen flex-col">
-          {/* Navigation now includes GoogleTranslate inline */}
           <Navigation />
           <main className="flex-1 pt-16">
             <PageTransition>{children}</PageTransition>

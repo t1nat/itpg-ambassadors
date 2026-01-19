@@ -1,13 +1,13 @@
 'use client'
 
-import '@/lib/i18n/client' // Initialize i18n before useTranslation
+import '@/lib/i18n/client'
 import { useState } from "react"
 import { useTranslation } from 'react-i18next'
 import { motion } from "framer-motion"
 
 export interface Project {
   id: number
-  title: any // Changed to any to handle JSON
+  title: any
   short_description: any 
   long_description: any
   image_url: string
@@ -25,7 +25,6 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
   const [error, setError] = useState("")
   const [expanded, setExpanded] = useState(false) 
 
-  // Helper to pick the correct language from JSON
   const getTranslatedText = (field: any) => {
     const lang = i18n.language || 'bg'
     if (field && typeof field === 'object') {
@@ -86,53 +85,48 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
 
       <div className="p-6 relative">
         <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
-        <motion.h2
-          className="text-2xl font-bold text-gray-900 mb-3 mt-4"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.5 }}
+        <motion.div
+          className="overflow-hidden"
+          initial={{ opacity: 0, height: 0 }}
+          whileHover={{ opacity: 1, height: "auto" }}
+          transition={{ duration: 0.3 }}
         >
-          {getTranslatedText(project.title)}
-        </motion.h2>
-        <motion.p
-          className="text-gray-600 mb-4 leading-relaxed"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-        >
-          {getTranslatedText(project.short_description)}
-        </motion.p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-3 mt-4">
+            {getTranslatedText(project.title)}
+          </h2>
+          <p className="text-gray-600 mb-4 leading-relaxed">
+            {getTranslatedText(project.short_description)}
+          </p>
 
-        {expanded && (
-          <motion.div
-            className="text-gray-700 whitespace-pre-line border-t border-gray-100 pt-4"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {getTranslatedText(project.long_description)}
-          </motion.div>
-        )}
-
-        <div className="flex justify-between items-center mt-4">
-          <motion.button
-            onClick={() => setExpanded(!expanded)}
-            className="text-blue-500 hover:text-blue-700 font-medium flex items-center space-x-1 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span>{expanded ? t('project.showLess', 'Show Less') : t('project.readMore', 'Read More')}</span>
-            <motion.span
-              animate={{ rotate: expanded ? 180 : 0 }}
+          {expanded && (
+            <motion.div
+              className="text-gray-700 whitespace-pre-line border-t border-gray-100 pt-4"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
-              ▼
-            </motion.span>
-          </motion.button>
-        </div>
+              {getTranslatedText(project.long_description)}
+            </motion.div>
+          )}
+
+          <div className="flex justify-between items-center mt-4">
+            <motion.button
+              onClick={() => setExpanded(!expanded)}
+              className="text-blue-500 hover:text-blue-700 font-medium flex items-center space-x-1 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span>{expanded ? t('project.showLess', 'Show Less') : t('project.readMore', 'Read More')}</span>
+              <motion.span
+                animate={{ rotate: expanded ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                ▼
+              </motion.span>
+            </motion.button>
+          </div>
+        </motion.div>
 
         {error && (
           <motion.p

@@ -49,10 +49,8 @@ export function LanguageSwitcher() {
   const currentLang = languages.find(lang => lang.code === i18n.language) || languages[0]
 
   const switchLanguage = (newLang: string) => {
-    // Get the current path segments
     const segments = pathname.split('/').filter(Boolean)
 
-    // Replace the locale segment (first segment) with the new language
     if (segments.length > 0) {
       segments[0] = newLang
     } else {
@@ -61,10 +59,8 @@ export function LanguageSwitcher() {
 
     const newPath = `/${segments.join('/')}`
 
-    // Navigate to the new path
     router.push(newPath)
 
-    // Update i18n language
     i18n.changeLanguage(newLang)
   }
 
