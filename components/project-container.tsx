@@ -48,14 +48,14 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
 
   return (
     <motion.div
-      className="relative group overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+      className="relative group overflow-hidden rounded-2xl bg-card border border-border shadow-lg dark:shadow-primary/5 hover:shadow-2xl dark:hover:shadow-primary/10 transition-all duration-500 transform hover:-translate-y-2"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
       <div className="relative overflow-hidden rounded-t-2xl">
         <img src={project.image_url ?? "/placeholder.svg"} alt={title} className="w-full h-64 object-cover transform transition-transform duration-700 group-hover:scale-110" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         <div className="absolute top-4 right-4">
           <button
             type="button"
@@ -63,9 +63,9 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
             disabled={voted || loading}
             aria-label={voted ? t("project.alreadyVoted", "Already voted") : t("project.voteFor", "Vote for this project")}
             className={`px-4 py-2 text-white text-sm font-medium rounded-full transition-all duration-300
-              ${voted ? "bg-green-500 cursor-default" : "bg-blue-500 hover:bg-blue-600"}
+              ${voted ? "bg-chart-3 cursor-default" : "bg-primary hover:bg-primary/80"}
               ${loading ? "opacity-70 cursor-wait" : ""} 
-              transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300`}
+              transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50`}
           >
             {voted ? t("project.voted", "Voted") : loading ? t("project.voting", "Voting...") : t("project.vote", "Vote")}
           </button>
@@ -73,14 +73,14 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
       </div>
 
       <div className="p-6 relative">
-        <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+        <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <div className="overflow-hidden">
-          <h2 className="text-2xl font-bold text-gray-900 mb-3 mt-4">{title}</h2>
-          <p className="text-gray-600 mb-4 leading-relaxed">{shortDescription}</p>
+          <h2 className="text-2xl font-bold text-foreground mb-3 mt-4">{title}</h2>
+          <p className="text-muted-foreground mb-4 leading-relaxed">{shortDescription}</p>
 
           {expanded && longDescription && (
             <motion.div
-              className="text-gray-700 whitespace-pre-line border-t border-gray-100 pt-4"
+              className="text-foreground/80 whitespace-pre-line border-t border-border pt-4"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
@@ -95,7 +95,7 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
               type="button"
               onClick={toggleExpanded}
               aria-expanded={expanded}
-              className="text-blue-500 hover:text-blue-700 font-medium flex items-center space-x-1 transition-colors hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded"
+              className="text-primary hover:text-primary/80 font-medium flex items-center space-x-1 transition-colors hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary/30 rounded"
             >
               <span>{expanded ? t("project.showLess", "Show Less") : t("project.readMore", "Read More")}</span>
               <motion.span animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.3 }} aria-hidden="true">
@@ -106,7 +106,7 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
         </div>
 
         {error && (
-          <motion.p role="alert" className="mt-2 text-xs text-red-500" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }}>
+          <motion.p role="alert" className="mt-2 text-xs text-destructive" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }}>
             {error}
           </motion.p>
         )}

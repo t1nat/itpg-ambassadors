@@ -48,10 +48,10 @@ export default function TeachersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50">
+    <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-12">
         <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-slate-900">{t("teachers.title", "Our Teachers")}</h1>
+          <h1 className="mb-4 text-4xl font-bold bg-gradient-to-r from-primary via-chart-2 to-chart-3 bg-clip-text text-transparent">{t("teachers.title", "Our Teachers")}</h1>
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -70,16 +70,16 @@ export default function TeachersPage() {
 
             return (
               <motion.div key={teacher.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} whileHover={{ y: -5 }}>
-                <Card className="h-full overflow-hidden border-0 bg-white/80 shadow-md backdrop-blur-sm rounded-3xl">
+                <Card className="h-full overflow-hidden border border-border bg-card/80 dark:bg-card/60 shadow-md dark:shadow-primary/5 backdrop-blur-sm rounded-3xl">
                   <div className="relative aspect-square">
                     <Image src={teacher.image_url || "/placeholder.svg"} alt={typeof name === "string" ? name : "Teacher"} fill className="object-cover" />
                   </div>
                   <CardContent className="p-6">
                     <div className="mb-4 flex items-center justify-between gap-2">
-                      <h3 className="text-2xl font-bold text-slate-800">{name}</h3>
-                      {subject && <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100 border-none px-3 py-1">{subject}</Badge>}
+                      <h3 className="text-2xl font-bold text-foreground">{name}</h3>
+                      {subject && <Badge className="bg-primary/20 text-primary hover:bg-primary/30 border-none px-3 py-1">{subject}</Badge>}
                     </div>
-                    {bio && <p className="text-sm leading-relaxed text-slate-600 line-clamp-4">{bio}</p>}
+                    {bio && <p className="text-sm leading-relaxed text-muted-foreground line-clamp-4">{bio}</p>}
                   </CardContent>
                 </Card>
               </motion.div>

@@ -1,58 +1,57 @@
-"use client"
+"use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion"
-import { useEffect, useState } from "react"
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export function CustomCursor() {
-  const [isHovered, setIsHovered] = useState(false)
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
+  const [isHovered, setIsHovered] = useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-  const springX = useSpring(mouseX, { stiffness: 300, damping: 30 })
-  const springY = useSpring(mouseY, { stiffness: 300, damping: 30 })
+  const springX = useSpring(mouseX, { stiffness: 300, damping: 30 });
+  const springY = useSpring(mouseY, { stiffness: 300, damping: 30 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX - 16)
-      mouseY.set(e.clientY - 16)
-    }
+      mouseX.set(e.clientX - 16);
+      mouseY.set(e.clientY - 16);
+    };
 
-    const handleMouseEnter = () => setIsHovered(true)
-    const handleMouseLeave = () => setIsHovered(false)
+    const handleMouseEnter = () => setIsHovered(true);
+    const handleMouseLeave = () => setIsHovered(false);
 
-    const interactiveElements = document.querySelectorAll('button, a, [role="button"], input, textarea')
-    interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', handleMouseEnter)
-      el.addEventListener('mouseleave', handleMouseLeave)
-    })
+    const interactiveElements = document.querySelectorAll('button, a, [role="button"], input, textarea');
+    interactiveElements.forEach((el) => {
+      el.addEventListener("mouseenter", handleMouseEnter);
+      el.addEventListener("mouseleave", handleMouseLeave);
+    });
 
-    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      interactiveElements.forEach(el => {
-        el.removeEventListener('mouseenter', handleMouseEnter)
-        el.removeEventListener('mouseleave', handleMouseLeave)
-      })
-    }
-  }, [mouseX, mouseY])
+      window.removeEventListener("mousemove", handleMouseMove);
+      interactiveElements.forEach((el) => {
+        el.removeEventListener("mouseenter", handleMouseEnter);
+        el.removeEventListener("mouseleave", handleMouseLeave);
+      });
+    };
+  }, [mouseX, mouseY]);
 
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 bg-blue-500/20 rounded-full pointer-events-none z-50 mix-blend-difference"
+        className="fixed top-0 left-0 w-8 h-8 bg-primary/20 rounded-full pointer-events-none z-50 mix-blend-difference"
         style={{
           x: springX,
           y: springY,
         }}
         animate={{
           scale: isHovered ? 1.5 : 1,
-          backgroundColor: isHovered ? 'rgba(59, 130, 246, 0.4)' : 'rgba(59, 130, 246, 0.2)',
         }}
         transition={{ type: "spring", stiffness: 500, damping: 28 }}
       />
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-blue-600 rounded-full pointer-events-none z-50"
+        className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full pointer-events-none z-50"
         style={{
           x: springX,
           y: springY,
@@ -63,5 +62,5 @@ export function CustomCursor() {
         transition={{ duration: 0.2 }}
       />
     </>
-  )
+  );
 }

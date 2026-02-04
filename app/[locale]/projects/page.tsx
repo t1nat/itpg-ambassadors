@@ -75,10 +75,10 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+    <div className="min-h-screen bg-background">
       <motion.div className="container mx-auto px-4 py-12" initial="hidden" animate="visible" variants={container}>
         <motion.div className="mb-12 text-center" variants={item}>
-          <motion.h1 className="mb-4 text-4xl font-bold" variants={item}>
+          <motion.h1 className="mb-4 text-4xl font-bold bg-gradient-to-r from-primary via-chart-2 to-chart-3 bg-clip-text text-transparent" variants={item}>
             {t("projects.title", "Our Projects")}
           </motion.h1>
           <motion.p className="mx-auto max-w-2xl text-muted-foreground" variants={item}>

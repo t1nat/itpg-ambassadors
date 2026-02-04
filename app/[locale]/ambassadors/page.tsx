@@ -52,10 +52,10 @@ export default function AmbassadorsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50 px-4 py-12">
+    <div className="min-h-screen bg-background px-4 py-12">
       <div className="container mx-auto">
         <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold">{t("ambassadors.title", "Our Ambassadors")}</h1>
+          <h1 className="mb-4 text-4xl font-bold bg-gradient-to-r from-primary via-chart-2 to-chart-3 bg-clip-text text-transparent">{t("ambassadors.title", "Our Ambassadors")}</h1>
           <p className="mx-auto max-w-2xl text-muted-foreground">{t("ambassadors.description", "Meet our team")}</p>
         </div>
 
@@ -76,12 +76,12 @@ export default function AmbassadorsPage() {
 
             return (
               <motion.div key={ambassador.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} whileHover={{ y: -10 }}>
-                <Card className="overflow-hidden rounded-3xl border-0 bg-white/80 shadow-lg backdrop-blur-sm transition-shadow hover:shadow-2xl">
+                <Card className="overflow-hidden rounded-3xl border border-border bg-card/80 dark:bg-card/60 shadow-lg dark:shadow-primary/5 backdrop-blur-sm transition-shadow hover:shadow-2xl dark:hover:shadow-primary/10">
                   <div className="relative aspect-square">
                     <Image src={ambassador.image_url || "/placeholder.svg"} alt={name} fill className="object-cover" />
                   </div>
                   <CardContent className="p-6">
-                    <h3 className="mb-3 text-2xl font-bold text-blue-600">{name}</h3>
+                    <h3 className="mb-3 text-2xl font-bold text-primary">{name}</h3>
                     {bio && (
                       <motion.p
                         className="text-sm leading-relaxed text-muted-foreground"

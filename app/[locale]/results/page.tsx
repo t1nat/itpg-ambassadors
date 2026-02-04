@@ -85,14 +85,14 @@ export default function ResultsPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-white font-sans relative overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-background font-sans relative overflow-hidden">
       <AnimatedBackground />
       <section className="relative py-32 px-6 z-10">
         <motion.div className="container mx-auto">
           <motion.div className="mb-12 text-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <h1 className="mb-4 text-4xl font-bold">{t("results.title", "Voting Results")}</h1>
+            <h1 className="mb-4 text-4xl font-bold bg-gradient-to-r from-primary via-chart-2 to-chart-3 bg-clip-text text-transparent">{t("results.title", "Voting Results")}</h1>
             <p className="mx-auto max-w-2xl text-balance text-lg text-muted-foreground">
-              {t("results.description", "See which projects are leading the vote! Total votes cast:")} <span className="font-semibold">{totalVotes}</span>
+              {t("results.description", "See which projects are leading the vote! Total votes cast:")} <span className="font-semibold text-primary">{totalVotes}</span>
             </p>
           </motion.div>
 
@@ -121,14 +121,16 @@ export default function ResultsPage() {
 
                 return (
                   <motion.div key={project.id} variants={item}>
-                    <Card className={`overflow-hidden rounded-3xl border-0 bg-white/80 shadow-lg backdrop-blur-sm transition-shadow hover:shadow-2xl ${index < 3 ? "border-2 border-primary/20" : ""}`}>
+                    <Card
+                      className={`overflow-hidden rounded-3xl border border-border bg-card/80 dark:bg-card/60 shadow-lg dark:shadow-primary/5 backdrop-blur-sm transition-shadow hover:shadow-2xl dark:hover:shadow-primary/10 ${index < 3 ? "ring-2 ring-primary/20" : ""}`}
+                    >
                       <div className="relative aspect-video w-full overflow-hidden">
                         <Image src={project.image_url || "/placeholder.svg?height=200&width=300"} alt={title} fill className="object-cover" />
                         <div className="absolute top-4 left-4">{getRankIcon(index)}</div>
                       </div>
                       <div className="p-6">
                         <div className="mb-3 flex flex-wrap items-center gap-2">
-                          <h3 className="text-xl font-semibold">{title}</h3>
+                          <h3 className="text-xl font-semibold text-foreground">{title}</h3>
                           {getRankBadge(index)}
                           {project.year && <Badge variant="outline">{project.year}</Badge>}
                         </div>
