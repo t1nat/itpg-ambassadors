@@ -1,25 +1,28 @@
-import { voteRepository, projectRepository, DuplicateVoteError } from "@/lib/repositories";
+import { voteRepository, projectRepository } from "@/lib/repositories";
 import { voteRequestSchema } from "@/lib/validations";
 import type { Vote, ProjectWithVotes } from "@/lib/validations";
+import type { IVoteService, IVoteRepository, IProjectRepository, VoteResult, VotingResults } from "@/lib/types";
+import { DuplicateError } from "@/lib/types";
 
-export interface VoteResult {
-  success: boolean;
-  vote?: Vote;
-  error?: string;
-}
+// Re-export types for backwards compatibility
+export type { VoteResult, VotingResults } from "@/lib/types";
 
-export interface VotingResults {
-  projects: ProjectWithVotes[];
-  total_votes: number;
-}
+/**
+ * Vote service implementation
+ * Handles business logic for voting operations
+ */
+export class VoteService implements IVoteService {
+  constructor(
+    private readonly voteRepo: IVoteRepository = voteRepository,
+    private readonly projectRepo: IProjectRepository = projectRepository,
+  ) {}
 
-export class VoteService {
   async vote(projectId: string, voterIp: string): Promise<VoteResult> {
     // Validate input
     const validated = voteRequestSchema.parse({ projectId });
 
     // Verify project exists
-    const project = await projectRepository.findById(validated.projectId);
+    const project = await this.projectRepo.findById(validated.projectId);
     if (!project) {
       return {
         success: false,
@@ -28,10 +31,10 @@ export class VoteService {
     }
 
     try {
-      const vote = await voteRepository.create({ project_id: validated.projectId }, voterIp);
+      const vote = await this.voteRepo.create({ project_id: validated.projectId }, voterIp);
       return { success: true, vote };
     } catch (error) {
-      if (error instanceof DuplicateVoteError) {
+      if (error instanceof DuplicateError) {
         return {
           success: false,
           error: "You have already voted for this project",
@@ -42,11 +45,11 @@ export class VoteService {
   }
 
   async getResults(): Promise<VotingResults> {
-    const [projects, voteCounts, totalVotes] = await Promise.all([projectRepository.findAll(), voteRepository.countByProject(), voteRepository.getTotalCount()]);
+    const [projects, voteCounts, totalVotes] = await Promise.all([this.projectRepo.findAll(), this.voteRepo.countByProject(), this.voteRepo.getTotalCount()]);
 
     const projectsWithVotes: ProjectWithVotes[] = projects.map((project) => ({
       ...project,
-      vote_count: voteCounts.get(project.id) || 0,
+      vote_count: voteCounts.get(project.id) ?? 0,
     }));
 
     // Sort by vote count descending
@@ -54,18 +57,19 @@ export class VoteService {
 
     return {
       projects: projectsWithVotes,
-      total_votes: totalVotes,
+      totalVotes,
     };
   }
 
   async hasVoted(projectId: string, voterIp: string): Promise<boolean> {
-    return voteRepository.hasVoted(projectId, voterIp);
+    return this.voteRepo.hasVoted(projectId, voterIp);
   }
 
   async getVoteCountForProject(projectId: string): Promise<number> {
-    const votes = await voteRepository.findByProjectId(projectId);
+    const votes = await this.voteRepo.findByProjectId(projectId);
     return votes.length;
   }
 }
 
+// Singleton instance for dependency injection
 export const voteService = new VoteService();

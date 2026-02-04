@@ -1,30 +1,43 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { SUPPORTED_LOCALES, DEFAULT_LOCALE, COOKIES, type SupportedLocale } from "@/lib/config/constants";
 
-const locales = ['bg', 'en', 'de', 'fr', 'es', 'it', 'pl', 'ro', 'cs', 'sk', 'sl', 'hr', 'sr', 'mk', 'al', 'me']
-const defaultLocale = 'bg'
+/**
+ * Check if a string is a supported locale
+ */
+function isSupportedLocale(locale: string): locale is SupportedLocale {
+  return SUPPORTED_LOCALES.includes(locale as SupportedLocale);
+}
 
+/**
+ * Middleware for handling locale-based routing
+ * - Redirects requests without locale prefix to the appropriate locale
+ * - Respects user's saved locale preference from cookie
+ */
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const { pathname } = request.nextUrl;
 
-  if (pathname.includes('.') || pathname.startsWith('/_next') || pathname.startsWith('/api')) {
-    return NextResponse.next()
+  // Skip middleware for static files, Next.js internals, and API routes
+  if (pathname.includes(".") || pathname.startsWith("/_next") || pathname.startsWith("/api")) {
+    return NextResponse.next();
   }
 
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  )
+  // Check if pathname already has a valid locale prefix
+  const pathnameHasLocale = SUPPORTED_LOCALES.some((locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`);
 
-  if (pathnameHasLocale) return NextResponse.next()
+  if (pathnameHasLocale) {
+    return NextResponse.next();
+  }
 
-  // ПРОМЯНА: Вземи записания език от бисквитката, ако съществува
-  const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value
-  const locale = locales.includes(cookieLocale || '') ? cookieLocale : defaultLocale
+  // Get saved locale from cookie, or use default
+  const cookieLocale = request.cookies.get(COOKIES.locale)?.value;
+  const locale = cookieLocale && isSupportedLocale(cookieLocale) ? cookieLocale : DEFAULT_LOCALE;
 
-  const url = new URL(`/${locale}${pathname}`, request.url)
-  return NextResponse.redirect(url)
+  // Redirect to locale-prefixed URL
+  const url = new URL(`/${locale}${pathname}`, request.url);
+  return NextResponse.redirect(url);
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)'],
-}
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)"],
+};

@@ -1,47 +1,52 @@
 import { projectRepository } from "@/lib/repositories";
 import { createProjectSchema, updateProjectSchema } from "@/lib/validations";
 import type { Project, CreateProjectInput, UpdateProjectInput } from "@/lib/validations";
+import type { IProjectService, IProjectRepository } from "@/lib/types";
+import { NotFoundError } from "@/lib/types";
 
-export class ProjectService {
+/**
+ * Project service implementation
+ * Handles business logic for project operations
+ */
+export class ProjectService implements IProjectService {
+  constructor(private readonly repository: IProjectRepository = projectRepository) {}
+
   async getAll(): Promise<Project[]> {
-    return projectRepository.findAll();
+    return this.repository.findAll();
   }
 
   async getById(id: string): Promise<Project | null> {
-    return projectRepository.findById(id);
+    return this.repository.findById(id);
   }
 
   async create(input: CreateProjectInput): Promise<Project> {
     const validated = createProjectSchema.parse(input);
-    return projectRepository.create(validated);
+    return this.repository.create(validated);
   }
 
   async update(id: string, input: UpdateProjectInput): Promise<Project> {
     const validated = updateProjectSchema.parse(input);
 
-    const existing = await projectRepository.findById(id);
+    const existing = await this.repository.findById(id);
     if (!existing) {
-      throw new NotFoundError(`Project with id ${id} not found`);
+      throw new NotFoundError("Project", id);
     }
 
-    return projectRepository.update(id, validated);
+    return this.repository.update(id, validated);
   }
 
   async delete(id: string): Promise<void> {
-    const existing = await projectRepository.findById(id);
+    const existing = await this.repository.findById(id);
     if (!existing) {
-      throw new NotFoundError(`Project with id ${id} not found`);
+      throw new NotFoundError("Project", id);
     }
 
-    return projectRepository.delete(id);
+    return this.repository.delete(id);
   }
 }
 
-export class NotFoundError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = "NotFoundError";
-  }
-}
+// Re-export NotFoundError for backwards compatibility
+export { NotFoundError } from "@/lib/types";
 
+// Singleton instance for dependency injection
 export const projectService = new ProjectService();

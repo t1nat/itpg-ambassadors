@@ -1,4 +1,15 @@
-export { ambassadorService, AmbassadorService, NotFoundError as AmbassadorNotFoundError } from "./ambassador.service";
-export { teacherService, TeacherService, NotFoundError as TeacherNotFoundError } from "./teacher.service";
-export { projectService, ProjectService, NotFoundError as ProjectNotFoundError } from "./project.service";
-export { voteService, VoteService, type VoteResult, type VotingResults } from "./vote.service";
+// Ambassador service
+export { ambassadorService, AmbassadorService } from "./ambassador.service";
+
+// Teacher service
+export { teacherService, TeacherService } from "./teacher.service";
+
+// Project service
+export { projectService, ProjectService } from "./project.service";
+
+// Vote service
+export { voteService, VoteService } from "./vote.service";
+export type { VoteResult, VotingResults } from "./vote.service";
+
+// Re-export error types from types module for backwards compatibility
+export { NotFoundError } from "@/lib/types";

@@ -1,59 +1,63 @@
 import { ambassadorRepository } from "@/lib/repositories";
 import { createAmbassadorSchema, updateAmbassadorSchema } from "@/lib/validations";
 import type { Ambassador, CreateAmbassadorInput, UpdateAmbassadorInput } from "@/lib/validations";
+import type { IAmbassadorService, IAmbassadorRepository } from "@/lib/types";
+import { NotFoundError, getLocalizedText } from "@/lib/types";
 
-export class AmbassadorService {
+/**
+ * Ambassador service implementation
+ * Handles business logic for ambassador operations
+ */
+export class AmbassadorService implements IAmbassadorService {
+  constructor(private readonly repository: IAmbassadorRepository = ambassadorRepository) {}
+
   async getAll(): Promise<Ambassador[]> {
-    return ambassadorRepository.findAll();
+    return this.repository.findAll();
   }
 
   async getById(id: string): Promise<Ambassador | null> {
-    return ambassadorRepository.findById(id);
+    return this.repository.findById(id);
   }
 
   async create(input: CreateAmbassadorInput): Promise<Ambassador> {
     const validated = createAmbassadorSchema.parse(input);
-    return ambassadorRepository.create(validated);
+    return this.repository.create(validated);
   }
 
   async update(id: string, input: UpdateAmbassadorInput): Promise<Ambassador> {
     const validated = updateAmbassadorSchema.parse(input);
 
-    const existing = await ambassadorRepository.findById(id);
+    const existing = await this.repository.findById(id);
     if (!existing) {
-      throw new NotFoundError(`Ambassador with id ${id} not found`);
+      throw new NotFoundError("Ambassador", id);
     }
 
-    return ambassadorRepository.update(id, validated);
+    return this.repository.update(id, validated);
   }
 
   async delete(id: string): Promise<void> {
-    const existing = await ambassadorRepository.findById(id);
+    const existing = await this.repository.findById(id);
     if (!existing) {
-      throw new NotFoundError(`Ambassador with id ${id} not found`);
+      throw new NotFoundError("Ambassador", id);
     }
 
-    return ambassadorRepository.delete(id);
+    return this.repository.delete(id);
   }
 
+  /**
+   * Sort ambassadors by localized name
+   */
   sortByName(ambassadors: Ambassador[], locale: string): Ambassador[] {
     return [...ambassadors].sort((a, b) => {
-      const nameA = this.getLocalizedName(a.name, locale);
-      const nameB = this.getLocalizedName(b.name, locale);
+      const nameA = getLocalizedText(a.name, locale);
+      const nameB = getLocalizedText(b.name, locale);
       return nameA.localeCompare(nameB, locale);
     });
   }
-
-  private getLocalizedName(name: Record<string, string>, locale: string): string {
-    return name[locale] || name["bg"] || Object.values(name)[0] || "";
-  }
 }
 
-export class NotFoundError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = "NotFoundError";
-  }
-}
+// Re-export NotFoundError for backwards compatibility
+export { NotFoundError } from "@/lib/types";
 
+// Singleton instance for dependency injection
 export const ambassadorService = new AmbassadorService();

@@ -1,32 +1,38 @@
 import { type NextRequest } from "next/server";
-import { ZodError } from "zod";
 import { voteService } from "@/lib/services";
 import { voteRequestSchema } from "@/lib/validations";
-import { successResponse, errorResponse, validationErrorResponse, serverErrorResponse, getClientIp } from "@/lib/api";
+import { successResponse, errorResponse, handleApiError, getClientIp } from "@/lib/api";
+import { HTTP_STATUS } from "@/lib/config";
+import { voteRateLimiter } from "@/lib/utils/rate-limiter";
 
 export async function POST(request: NextRequest) {
   try {
+    // Get voter IP first for rate limiting
+    const voterIp = getClientIp(request);
+
+    // Reject requests with unknown IP
+    if (voterIp === "unknown") {
+      return errorResponse("Unable to determine client IP", HTTP_STATUS.BAD_REQUEST);
+    }
+
+    // Check rate limit before processing
+    voteRateLimiter(voterIp);
+
     const body = await request.json();
 
     // Validate input
     const validated = voteRequestSchema.parse(body);
 
-    // Get voter IP
-    const voterIp = getClientIp(request);
-
     // Process vote
     const result = await voteService.vote(validated.projectId, voterIp);
 
     if (!result.success) {
-      const status = result.error?.includes("already voted") ? 409 : 400;
-      return errorResponse(result.error || "Failed to vote", status);
+      const status = result.error?.includes("already voted") ? HTTP_STATUS.CONFLICT : HTTP_STATUS.BAD_REQUEST;
+      return errorResponse(result.error ?? "Failed to vote", status);
     }
 
-    return successResponse({ vote: result.vote }, 201);
+    return successResponse({ vote: result.vote }, HTTP_STATUS.CREATED);
   } catch (error) {
-    if (error instanceof ZodError) {
-      return validationErrorResponse(error);
-    }
-    return serverErrorResponse(error);
+    return handleApiError(error);
   }
 }
