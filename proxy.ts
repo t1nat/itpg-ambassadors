@@ -10,11 +10,11 @@ function isSupportedLocale(locale: string): locale is SupportedLocale {
 }
 
 /**
- * Middleware for handling locale-based routing
+ * Proxy for handling locale-based routing
  * - Redirects requests without locale prefix to the appropriate locale
  * - Respects user's saved locale preference from cookie
  */
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Skip middleware for static files, Next.js internals, and API routes
