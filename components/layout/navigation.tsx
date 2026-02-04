@@ -54,7 +54,7 @@ export function Navigation() {
   // Render placeholder during SSR to prevent hydration mismatch
   if (!mounted) {
     return (
-      <nav className="fixed top-0 right-0 z-50" aria-label="Main navigation">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/70 dark:bg-background/60 backdrop-blur-xl border-b border-border/50" aria-label="Main navigation">
         <div className="relative px-8 py-4">
           <div className="h-10" /> {/* Placeholder for content */}
         </div>
@@ -63,7 +63,7 @@ export function Navigation() {
   }
 
   return (
-    <nav className="fixed top-0 right-0 z-50" aria-label="Main navigation">
+    <nav className="fixed top-0 left-0 right-0 z-40 bg-background/70 dark:bg-background/60 backdrop-blur-xl border-b border-border/50" aria-label="Main navigation">
       <div className="relative">
         <div className="relative px-8 py-4">
           <div className="flex items-center justify-end gap-4">
