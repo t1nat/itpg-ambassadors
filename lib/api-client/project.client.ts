@@ -1,30 +1,18 @@
+import { apiClient } from "./axios-instance";
 import type { Project } from "@/lib/validations";
 import type { ApiResponse } from "@/lib/api";
 
-const API_BASE = "/api";
-
 export async function fetchProjects(): Promise<Project[]> {
-  const response = await fetch(`${API_BASE}/projects`);
-  const result: ApiResponse<Project[]> = await response.json();
-
-  if (!result.success) {
-    throw new Error(result.error || "Failed to fetch projects");
-  }
-
-  return result.data || [];
+  const { data } = await apiClient.get<ApiResponse<Project[]>>("/projects");
+  return data.data || [];
 }
 
 export async function fetchProjectById(id: string): Promise<Project> {
-  const response = await fetch(`${API_BASE}/projects/${id}`);
-  const result: ApiResponse<Project> = await response.json();
+  const { data } = await apiClient.get<ApiResponse<Project>>(`/projects/${id}`);
 
-  if (!result.success) {
-    throw new Error(result.error || "Failed to fetch project");
-  }
-
-  if (!result.data) {
+  if (!data.data) {
     throw new Error("Project not found");
   }
 
-  return result.data;
+  return data.data;
 }

@@ -1,30 +1,18 @@
+import { apiClient } from "./axios-instance";
 import type { Teacher } from "@/lib/validations";
 import type { ApiResponse } from "@/lib/api";
 
-const API_BASE = "/api";
-
 export async function fetchTeachers(): Promise<Teacher[]> {
-  const response = await fetch(`${API_BASE}/teachers`);
-  const result: ApiResponse<Teacher[]> = await response.json();
-
-  if (!result.success) {
-    throw new Error(result.error || "Failed to fetch teachers");
-  }
-
-  return result.data || [];
+  const { data } = await apiClient.get<ApiResponse<Teacher[]>>("/teachers");
+  return data.data || [];
 }
 
 export async function fetchTeacherById(id: string): Promise<Teacher> {
-  const response = await fetch(`${API_BASE}/teachers/${id}`);
-  const result: ApiResponse<Teacher> = await response.json();
+  const { data } = await apiClient.get<ApiResponse<Teacher>>(`/teachers/${id}`);
 
-  if (!result.success) {
-    throw new Error(result.error || "Failed to fetch teacher");
-  }
-
-  if (!result.data) {
+  if (!data.data) {
     throw new Error("Teacher not found");
   }
 
-  return result.data;
+  return data.data;
 }
