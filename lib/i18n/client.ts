@@ -73,8 +73,8 @@ if (!i18nInstance.isInitialized) {
  * Change the current language
  * @param locale - The locale to switch to
  */
-export function changeLanguage(locale: SupportedLocale): Promise<void> {
-  return i18nInstance.changeLanguage(locale);
+export async function changeLanguage(locale: SupportedLocale): Promise<void> {
+  await i18nInstance.changeLanguage(locale);
 }
 
 /**
