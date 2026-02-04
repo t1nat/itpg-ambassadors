@@ -4,15 +4,10 @@ import '@/lib/i18n/client'
 import { useState } from "react"
 import { useTranslation } from 'react-i18next'
 import { motion } from "framer-motion"
+import { submitVote } from "@/lib/api-client"
+import type { Project } from "@/lib/validations"
 
-export interface Project {
-  id: number
-  title: any
-  short_description: any 
-  long_description: any
-  image_url: string
-  extra_images: string[]
-}
+export type { Project }
 
 interface ProjectContainerProps {
   project: Project
@@ -37,19 +32,11 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
     setLoading(true)
     setError("")
     try {
-      const res = await fetch("/api/vote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ projectId: project.id }),
-      })
-      const data = await res.json()
-      if (!res.ok) {
-        setError(data.error || "Something went wrong")
-      } else {
-        setVoted(true)
-      }
+      await submitVote(project.id)
+      setVoted(true)
     } catch (err) {
-      setError(t('project.voteError', 'Failed to vote. Try again.'))
+      const message = err instanceof Error ? err.message : t('project.voteError', 'Failed to vote. Try again.')
+      setError(message)
     } finally {
       setLoading(false)
     }
@@ -65,7 +52,7 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
     >
       <div className="relative overflow-hidden rounded-t-2xl">
         <img
-          src={project.image_url}
+          src={project.image_url || "/placeholder.svg"}
           alt={getTranslatedText(project.title)}
           className="w-full h-64 object-cover transform transition-transform duration-700 group-hover:scale-110"
         />

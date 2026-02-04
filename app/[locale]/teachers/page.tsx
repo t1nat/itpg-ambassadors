@@ -2,20 +2,13 @@
 
 import '@/lib/i18n/client' 
 import { useEffect, useState } from "react"
-import { createClient } from "@/lib/supabase/client"
+import { fetchTeachers } from "@/lib/api-client"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { useTranslation } from 'react-i18next'
 import { motion } from "framer-motion"
-
-interface Teacher {
-  id: string
-  name: any 
-  subject: any
-  bio: any 
-  image_url: string | null
-}
+import type { Teacher } from "@/lib/validations"
 
 export default function TeachersPage() {
   const { t, i18n } = useTranslation('common')
@@ -25,17 +18,12 @@ export default function TeachersPage() {
   const currentLang = i18n.language || 'bg'
 
   useEffect(() => {
-    const fetchTeachers = async () => {
+    const loadTeachers = async () => {
       try {
         setLoading(true)
-        const supabase = createClient()
-        const { data, error } = await supabase.from("teachers").select("*")
+        const data = await fetchTeachers()
         
-        if (error) throw error
-
-        const rawData = (data || []) as Teacher[]
-        
-        const sortedData = [...rawData].sort((a, b) => {
+        const sortedData = [...data].sort((a, b) => {
           const valA = typeof a.name === 'object' ? (a.name?.[currentLang] || a.name?.['bg'] || "") : (a.name || "")
           const valB = typeof b.name === 'object' ? (b.name?.[currentLang] || b.name?.['bg'] || "") : (b.name || "")
           return String(valA).localeCompare(String(valB), currentLang)
@@ -48,7 +36,7 @@ export default function TeachersPage() {
         setLoading(false)
       }
     }
-    fetchTeachers()
+    loadTeachers()
   }, [currentLang])
 
   if (loading) {

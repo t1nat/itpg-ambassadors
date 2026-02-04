@@ -2,10 +2,11 @@
 
 import '@/lib/i18n/client'
 import { useEffect, useState } from "react"
-import { createClient } from "@/lib/supabase/client"
-import { ProjectContainer, Project } from "@/components/project-container"
+import { fetchProjects } from "@/lib/api-client"
+import { ProjectContainer } from "@/components/project-container"
 import { useTranslation } from 'react-i18next'
 import { motion } from "framer-motion"
+import type { Project } from "@/lib/validations"
 
 export default function ProjectsPage() {
   const { t } = useTranslation('common')
@@ -13,30 +14,17 @@ export default function ProjectsPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      const supabase = createClient()
-      const { data: projectsRaw, error } = await supabase
-        .from("projects")
-        .select("*")
-        .order("id", { ascending: false })
-
-      if (error) {
+    const loadProjects = async () => {
+      try {
+        const data = await fetchProjects()
+        setProjects(data)
+      } catch (error) {
         console.error("[v0] Error fetching projects:", error)
-      } else {
-        const mappedProjects: Project[] = (projectsRaw || []).map((p) => ({
-          id: p.id,
-          title: p.title,
-          short_description: p.short_description,
-          long_description: p.long_description,
-          image_url: p.image_url,
-          extra_images: p.extra_images || [],
-          created_at: p.created_at,
-        }))
-        setProjects(mappedProjects)
+      } finally {
+        setLoading(false)
       }
-      setLoading(false)
     }
-    fetchProjects()
+    loadProjects()
   }, [])
 
   if (loading) {

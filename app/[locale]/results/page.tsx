@@ -2,7 +2,7 @@
 
 import '@/lib/i18n/client'
 import { useEffect, useState } from "react"
-import { createClient } from "@/lib/supabase/client"
+import { fetchVotingResults } from "@/lib/api-client"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Trophy, Medal, Award } from "lucide-react"
@@ -10,16 +10,7 @@ import Image from "next/image"
 import { useTranslation } from 'react-i18next'
 import { motion } from "framer-motion"
 import { AnimatedBackground } from "@/components/animations/animated-background"
-
-interface ProjectWithVotes {
-  id: string
-  title: string
-  description: string
-  long_description: string
-  image_url: string | null
-  year: string | null
-  voteCount: number
-}
+import type { ProjectWithVotes } from "@/lib/validations"
 
 export default function ResultsPage() {
   const { t, i18n } = useTranslation('common')
@@ -30,46 +21,18 @@ export default function ResultsPage() {
   const currentLang = i18n.language || 'bg'
 
   useEffect(() => {
-    const fetchResults = async () => {
-      const supabase = createClient()
-
-      const { data: projects, error: projectsError } = await supabase.from("projects").select("*")
-
-      if (projectsError) {
-        console.error("[v0] Error fetching projects:", projectsError)
+    const loadResults = async () => {
+      try {
+        const results = await fetchVotingResults()
+        setProjectsWithVotes(results.projects)
+        setTotalVotes(results.total_votes)
+      } catch (error) {
+        console.error("[v0] Error fetching results:", error)
+      } finally {
         setLoading(false)
-        return
       }
-
-      const { data: votes, error: votesError } = await supabase.from("votes").select("project_id")
-
-      if (votesError) {
-        console.error("[v0] Error fetching votes:", votesError)
-        setLoading(false)
-        return
-      }
-
-      const voteCountMap = new Map<string, number>()
-      if (votes) {
-        votes.forEach((vote) => {
-          const count = voteCountMap.get(vote.project_id) || 0
-          voteCountMap.set(vote.project_id, count + 1)
-        })
-      }
-
-      const projectsWithVotesData: ProjectWithVotes[] =
-        projects?.map((project) => ({
-          ...project,
-          voteCount: voteCountMap.get(project.id) || 0,
-        })) || []
-
-      projectsWithVotesData.sort((a, b) => b.voteCount - a.voteCount)
-
-      setProjectsWithVotes(projectsWithVotesData)
-      setTotalVotes(votes?.length || 0)
-      setLoading(false)
     }
-    fetchResults()
+    loadResults()
   }, [])
 
   const getRankIcon = (index: number) => {
@@ -194,8 +157,8 @@ export default function ResultsPage() {
                         </motion.div>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <span className="text-2xl font-bold text-primary">{project.voteCount}</span>
-                            <span className="text-sm text-muted-foreground">{project.voteCount === 1 ? t('results.vote', 'vote') : t('results.votes', 'votes')}</span>
+                            <span className="text-2xl font-bold text-primary">{project.vote_count}</span>
+                            <span className="text-sm text-muted-foreground">{project.vote_count === 1 ? t('results.vote', 'vote') : t('results.votes', 'votes')}</span>
                           </div>
                         </div>
                       </div>

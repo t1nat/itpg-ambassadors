@@ -2,18 +2,12 @@
 
 import '@/lib/i18n/client' 
 import { useEffect, useState } from "react"
-import { createClient } from "@/lib/supabase/client"
+import { fetchAmbassadors } from "@/lib/api-client"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image"
 import { useTranslation } from 'react-i18next'
 import { motion } from "framer-motion"
-
-interface Ambassador {
-  id: string
-  name: any
-  bio: any
-  image_url: string | null
-}
+import type { Ambassador } from "@/lib/validations"
 
 export default function AmbassadorsPage() {
   const { t, i18n } = useTranslation('common')
@@ -23,17 +17,12 @@ export default function AmbassadorsPage() {
   const currentLang = i18n.language || 'bg'
 
   useEffect(() => {
-    const fetchAmbassadors = async () => {
+    const loadAmbassadors = async () => {
       try {
         setLoading(true)
-        const supabase = createClient()
-        const { data, error } = await supabase.from("ambassadors").select("*")
+        const data = await fetchAmbassadors()
         
-        if (error) throw error
-
-        const rawData = (data || []) as Ambassador[]
-        
-        const sortedData = [...rawData].sort((a, b) => {
+        const sortedData = [...data].sort((a, b) => {
           const valA = a.name?.[currentLang] || a.name?.['bg'] || ""
           const valB = b.name?.[currentLang] || b.name?.['bg'] || ""
 
@@ -51,7 +40,7 @@ export default function AmbassadorsPage() {
       }
     }
 
-    fetchAmbassadors()
+    loadAmbassadors()
   }, [currentLang]) 
 
   if (loading) {
