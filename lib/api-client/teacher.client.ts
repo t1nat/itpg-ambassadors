@@ -3,16 +3,27 @@ import type { Teacher } from "@/lib/validations";
 import type { ApiResponse } from "@/lib/api";
 
 export async function fetchTeachers(): Promise<Teacher[]> {
-  const { data } = await apiClient.get<ApiResponse<Teacher[]>>("/teachers");
-  return data.data || [];
+  const response = await apiClient.get<ApiResponse<Teacher[]>>("/teachers");
+  const result = response.data;
+
+  if (!result.success) {
+    throw new Error(result.error || "Failed to fetch teachers");
+  }
+
+  return result.data || [];
 }
 
 export async function fetchTeacherById(id: string): Promise<Teacher> {
-  const { data } = await apiClient.get<ApiResponse<Teacher>>(`/teachers/${id}`);
+  const response = await apiClient.get<ApiResponse<Teacher>>(`/teachers/${id}`);
+  const result = response.data;
 
-  if (!data.data) {
+  if (!result.success) {
+    throw new Error(result.error || "Failed to fetch teacher");
+  }
+
+  if (!result.data) {
     throw new Error("Teacher not found");
   }
 
-  return data.data;
+  return result.data;
 }

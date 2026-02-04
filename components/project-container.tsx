@@ -46,8 +46,7 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
     <motion.div
       className="relative group overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
       initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
       <div className="relative overflow-hidden rounded-t-2xl">
@@ -72,7 +71,7 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
 
       <div className="p-6 relative">
         <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
-        <motion.div className="overflow-hidden" initial={{ opacity: 0, height: 0 }} whileHover={{ opacity: 1, height: "auto" }} transition={{ duration: 0.3 }}>
+        <div className="overflow-hidden">
           <h2 className="text-2xl font-bold text-gray-900 mb-3 mt-4">{getTranslatedText(project.title)}</h2>
           <p className="text-gray-600 mb-4 leading-relaxed">{getTranslatedText(project.short_description)}</p>
 
@@ -89,19 +88,14 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
           )}
 
           <div className="flex justify-between items-center mt-4">
-            <motion.button
-              onClick={() => setExpanded(!expanded)}
-              className="text-blue-500 hover:text-blue-700 font-medium flex items-center space-x-1 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <button onClick={() => setExpanded(!expanded)} className="text-blue-500 hover:text-blue-700 font-medium flex items-center space-x-1 transition-colors hover:scale-105 active:scale-95">
               <span>{expanded ? t("project.showLess", "Show Less") : t("project.readMore", "Read More")}</span>
               <motion.span animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
                 ▼
               </motion.span>
-            </motion.button>
+            </button>
           </div>
-        </motion.div>
+        </div>
 
         {error && (
           <motion.p className="mt-2 text-xs text-red-500" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }}>

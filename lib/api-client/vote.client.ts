@@ -12,21 +12,31 @@ export interface VotingResultsResponse {
 }
 
 export async function submitVote(projectId: string): Promise<Vote> {
-  const { data } = await apiClient.post<ApiResponse<VoteResponse>>("/votes", { projectId });
+  const response = await apiClient.post<ApiResponse<VoteResponse>>("/votes", { projectId });
+  const result = response.data;
 
-  if (!data.data?.vote) {
+  if (!result.success) {
+    throw new Error(result.error || "Failed to vote");
+  }
+
+  if (!result.data?.vote) {
     throw new Error("Vote not created");
   }
 
-  return data.data.vote;
+  return result.data.vote;
 }
 
 export async function fetchVotingResults(): Promise<VotingResultsResponse> {
-  const { data } = await apiClient.get<ApiResponse<VotingResultsResponse>>("/votes/results");
+  const response = await apiClient.get<ApiResponse<VotingResultsResponse>>("/votes/results");
+  const result = response.data;
 
-  if (!data.data) {
+  if (!result.success) {
+    throw new Error(result.error || "Failed to fetch voting results");
+  }
+
+  if (!result.data) {
     throw new Error("No results found");
   }
 
-  return data.data;
+  return result.data;
 }

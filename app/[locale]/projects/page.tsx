@@ -1,7 +1,7 @@
 "use client";
 
 import "@/lib/i18n/client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { fetchProjects } from "@/lib/api-client";
 import { ProjectContainer } from "@/components/project-container";
 import { useTranslation } from "react-i18next";
@@ -12,25 +12,41 @@ export default function ProjectsPage() {
   const { t } = useTranslation("common");
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const loadProjects = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await fetchProjects();
+      setProjects(data);
+    } catch (err) {
+      console.error("[v0] Error fetching projects:", err);
+      setError(err instanceof Error ? err.message : "Failed to load projects");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    const loadProjects = async () => {
-      try {
-        const data = await fetchProjects();
-        setProjects(data);
-      } catch (error) {
-        console.error("[v0] Error fetching projects:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
     loadProjects();
-  }, []);
+  }, [loadProjects]);
 
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-12 text-center">
         <p>{t("loading", "Loading...")}</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-12 text-center">
+        <p className="text-red-500 mb-4">{error}</p>
+        <button onClick={loadProjects} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          {t("retry", "Retry")}
+        </button>
       </div>
     );
   }
@@ -70,8 +86,8 @@ export default function ProjectsPage() {
           </motion.p>
         </motion.div>
 
-        <motion.div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3" variants={container} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          {projects.map((project, index) => (
+        <motion.div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3" variants={container}>
+          {projects.map((project) => (
             <motion.div key={project.id} variants={item}>
               <ProjectContainer project={project} />
             </motion.div>

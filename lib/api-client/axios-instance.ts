@@ -9,21 +9,12 @@ export const apiClient = axios.create({
   },
 });
 
-// Response interceptor to handle API response format
+// Response interceptor for error handling
 apiClient.interceptors.response.use(
-  (response) => {
-    const data = response.data;
-    if (data && typeof data === "object" && "success" in data) {
-      if (!data.success) {
-        return Promise.reject(new Error(data.error || "Request failed"));
-      }
-    }
-    return response;
-  },
+  (response) => response,
   (error) => {
-    if (error.response?.data?.error) {
-      return Promise.reject(new Error(error.response.data.error));
-    }
-    return Promise.reject(error);
+    // Extract error message from API response if available
+    const errorMessage = error.response?.data?.error || error.message || "Request failed";
+    return Promise.reject(new Error(errorMessage));
   },
 );
