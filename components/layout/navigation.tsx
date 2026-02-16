@@ -75,7 +75,7 @@ export function Navigation() {
                     href={link.href}
                     role="menuitem"
                     aria-current={pathname === link.href ? "page" : undefined}
-                    className={`relative px-4 py-2 text-sm font-medium text-foreground transition-all duration-300 hover:text-cyan-600  after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-cyan-400 after:to-teal-400 after:transition-all after:duration-300 hover:after:w-full focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 rounded ${
+                    className={`relative px-4 py-2 text-sm font-medium text-foreground transition-all duration-300 hover:text-cyan-600 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-cyan-400 after:to-teal-400 after:transition-all after:duration-300 hover:after:w-full focus:outline-none ${
                       pathname === link.href ? "text-cyan-600 after:w-full" : ""
                     }`}
                   >

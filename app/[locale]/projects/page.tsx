@@ -6,6 +6,7 @@ import { fetchProjects } from "@/lib/api-client";
 import { ProjectContainer } from "@/components/project-container";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import { AnimatedBackground } from "@/components/animations/animated-background";
 import type { Project } from "@/lib/validations";
 
 export default function ProjectsPage() {
@@ -75,8 +76,9 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <motion.div className="container mx-auto px-4 py-12" initial="hidden" animate="visible" variants={container}>
+    <div className="flex flex-col min-h-screen bg-background font-sans relative overflow-hidden">
+      <AnimatedBackground />
+      <motion.div className="container mx-auto px-4 py-12 relative z-10" initial="hidden" animate="visible" variants={container}>
         <motion.div className="mb-12 text-center" variants={item}>
           <motion.h1 className="mb-4 text-4xl font-bold bg-gradient-to-r from-primary via-chart-2 to-chart-3 bg-clip-text text-transparent" variants={item}>
             {t("projects.title", "Our Projects")}

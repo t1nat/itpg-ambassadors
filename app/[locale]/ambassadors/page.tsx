@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import { AnimatedBackground } from "@/components/animations/animated-background";
 import type { Ambassador } from "@/lib/validations";
 
 export default function AmbassadorsPage() {
@@ -52,8 +53,9 @@ export default function AmbassadorsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background px-4 py-12">
-      <div className="container mx-auto">
+    <div className="flex flex-col min-h-screen bg-background font-sans relative overflow-hidden">
+      <AnimatedBackground />
+      <div className="container mx-auto px-4 py-12 relative z-10">
         <div className="mb-12 text-center">
           <h1 className="mb-4 text-4xl font-bold bg-gradient-to-r from-primary via-chart-2 to-chart-3 bg-clip-text text-transparent">{t("ambassadors.title", "Our Ambassadors")}</h1>
           <p className="mx-auto max-w-2xl text-muted-foreground">{t("ambassadors.description", "Meet our team")}</p>
