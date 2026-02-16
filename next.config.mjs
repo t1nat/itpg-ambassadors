@@ -4,15 +4,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'drive.google.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-      },
-      {
-        protocol: 'http',
-        hostname: 'googleusercontent.com',
+        hostname: 'bgmqgozofllltfvauwhv.supabase.co',
+        pathname: '/storage/v1/object/public/**',
       },
     ],
   },

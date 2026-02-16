@@ -46,6 +46,7 @@ export function Navigation() {
       { href: `/${locale}/ambassadors`, label: t("nav.ambassadors") },
       { href: `/${locale}/teachers`, label: t("nav.teachers") },
       { href: `/${locale}/projects`, label: t("nav.projects") },
+      { href: `/${locale}/gallery`, label: t("nav.gallery") },
       { href: `/${locale}/results`, label: t("nav.results") },
     ],
     [locale, t, i18n.language],

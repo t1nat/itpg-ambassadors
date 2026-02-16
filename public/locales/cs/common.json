@@ -4,6 +4,7 @@
     "ambassadors": "Velvyslanci",
     "teachers": "Učitelé",
     "projects": "Projekty",
+    "gallery": "Galerie",
     "results": "Výsledky"
   },
   "hero": {
@@ -67,7 +68,8 @@
     "vote": "Hlasovat",
     "showLess": "Zobrazit méně ▲",
     "readMore": "Přečíst více ▼",
-    "voteError": "Hlasování se nezdařilo. Zkuste to znovu."
+    "voteError": "Hlasování se nezdařilo. Zkuste to znovu.",
+    "seePhotos": "Zobrazit fotky"
   },
   "results": {
     "title": "Výsledky hlasování",
@@ -79,6 +81,15 @@
     "votes": "hlasy",
     "noResults": "Zatím nejsou k dispozici žádné výsledky hlasování."
   },
-  "loading": "Loading...",
-  "language": "Jazyk"
+  "loading": "Načítání...",
+  "language": "Jazyk",
+  "gallery": {
+    "title": "Fotogalerie",
+    "description": "Prohlédněte si fotografie z našich projektů a podívejte se, co naši velvyslanci dokázali.",
+    "noPhotos": "Zatím nejsou k dispozici žádné fotografie. Zkuste to později!",
+    "photoCount": "{{count}} fotografií",
+    "projectPhotos": "{{count}} fotografií z tohoto projektu",
+    "photo": "Fotografie",
+    "backToAll": "Zpět ke všem projektům"
+  }
 }

@@ -4,6 +4,7 @@
     "ambassadors": "Botschafter",
     "teachers": "Lehrer",
     "projects": "Projekte",
+    "gallery": "Galerie",
     "results": "Ergebnisse"
   },
   "hero": {
@@ -82,7 +83,8 @@
     "vote": "Abstimmen",
     "showLess": "Weniger anzeigen ▲",
     "readMore": "Mehr lesen ▼",
-    "voteError": "Abstimmung fehlgeschlagen. Versuchen Sie es erneut."
+    "voteError": "Abstimmung fehlgeschlagen. Versuchen Sie es erneut.",
+    "seePhotos": "Fotos ansehen"
   },
   "results": {
     "title": "Abstimmungsergebnisse",
@@ -95,5 +97,14 @@
     "noResults": "Noch keine Abstimmungsergebnisse verfügbar."
   },
   "loading": "Laden...",
-  "language": "Sprache"
+  "language": "Sprache",
+  "gallery": {
+    "title": "Fotogalerie",
+    "description": "Durchsuchen Sie Fotos unserer Projekte und sehen Sie, was unsere Botschafter erreicht haben.",
+    "noPhotos": "Noch keine Fotos verfügbar. Schauen Sie bald wieder vorbei!",
+    "photoCount": "{{count}} Fotos",
+    "projectPhotos": "{{count}} Fotos aus diesem Projekt",
+    "photo": "Foto",
+    "backToAll": "Zurück zu allen Projekten"
+  }
 }

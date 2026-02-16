@@ -5,6 +5,8 @@ import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { submitVote } from "@/lib/api-client";
 import { useLocale } from "@/lib/hooks";
+import { Camera } from "lucide-react";
+import Link from "next/link";
 import type { Project } from "@/lib/validations";
 
 export type { Project };
@@ -18,7 +20,7 @@ interface ProjectContainerProps {
  * Displays project information with expandable description and vote button
  */
 export function ProjectContainer({ project }: ProjectContainerProps) {
-  const { t, getTranslated } = useLocale();
+  const { t, locale, getTranslated } = useLocale();
   const [voted, setVoted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -90,7 +92,7 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
             </motion.div>
           )}
 
-          <div className="flex justify-between items-center mt-4">
+          <div className="flex flex-wrap justify-between items-center mt-4 gap-3">
             <button
               type="button"
               onClick={toggleExpanded}
@@ -102,6 +104,22 @@ export function ProjectContainer({ project }: ProjectContainerProps) {
                 ▼
               </motion.span>
             </button>
+
+            {expanded && (
+              <motion.div
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Link
+                  href={`/${locale}/gallery?project=${project.id}`}
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary/30 rounded"
+                >
+                  <Camera className="h-4 w-4" />
+                  <span>{t("project.seePhotos", "See Photos")}</span>
+                </Link>
+              </motion.div>
+            )}
           </div>
         </div>
 

@@ -4,6 +4,7 @@
     "ambassadors": "Ambasadorët",
     "teachers": "Mësuesit",
     "projects": "Projektet",
+    "gallery": "Galeria",
     "results": "Rezultatet"
   },
   "hero": {
@@ -66,8 +67,18 @@
     "vote": "Vote",
     "showLess": "Show Less ▲",
     "readMore": "Read More ▼",
-    "voteError": "Failed to vote. Try again."
+    "voteError": "Failed to vote. Try again.",
+    "seePhotos": "Shih fotot"
   },
-  "loading": "Loading...",
-  "language": "Gjuha"
+  "loading": "Duke ngarkuar...",
+  "language": "Gjuha",
+  "gallery": {
+    "title": "Galeria e fotove",
+    "description": "Shfletoni fotot e projekteve tona dhe shihni çfarë kanë arritur ambasadorët tanë.",
+    "noPhotos": "Nuk ka foto të disponueshme ende. Kontrolloni së shpejti!",
+    "photoCount": "{{count}} foto",
+    "projectPhotos": "{{count}} foto nga ky projekt",
+    "photo": "Foto",
+    "backToAll": "Kthehu te të gjitha projektet"
+  }
 }

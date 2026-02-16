@@ -4,6 +4,7 @@
     "ambassadors": "Ambasadori",
     "teachers": "Profesori",
     "projects": "Proiecte",
+    "gallery": "Galerie",
     "results": "Rezultate"
   },
   "hero": {
@@ -67,7 +68,8 @@
     "vote": "Votează",
     "showLess": "Arată mai puțin ▲",
     "readMore": "Citește mai mult ▼",
-    "voteError": "Votarea a eșuat. Încearcă din nou."
+    "voteError": "Votul a eșuat. Încarcă din nou.",
+    "seePhotos": "Vezi fotografii"
   },
   "results": {
     "title": "Rezultatele votării",
@@ -79,6 +81,15 @@
     "votes": "voturi",
     "noResults": "Încă nu sunt disponibile rezultatele votării."
   },
-  "loading": "Loading...",
-  "language": "Limbă"
+  "loading": "Se încarcă...",
+  "language": "Limbă",
+  "gallery": {
+    "title": "Galerie foto",
+    "description": "Răsfoiți fotografiile proiectelor noastre și vedeți ce au realizat ambasadorii noștri.",
+    "noPhotos": "Nu sunt încă fotografii disponibile. Reveniți curând!",
+    "photoCount": "{{count}} fotografii",
+    "projectPhotos": "{{count}} fotografii din acest proiect",
+    "photo": "Fotografie",
+    "backToAll": "Înapoi la toate proiectele"
+  }
 }

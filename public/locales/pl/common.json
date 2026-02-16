@@ -4,6 +4,7 @@
     "ambassadors": "Ambasadorowie",
     "teachers": "Nauczyciele",
     "projects": "Projekty",
+    "gallery": "Galeria",
     "results": "Wyniki"
   },
   "hero": {
@@ -61,12 +62,13 @@
     "noTeachers": "Nie znaleziono nauczycieli. Spróbuj ponownie później."
   },
   "project": {
-    "voted": "Voted ✅",
-    "voting": "Voting...",
-    "vote": "Vote",
-    "showLess": "Show Less ▲",
-    "readMore": "Read More ▼",
-    "voteError": "Failed to vote. Try again."
+    "voted": "Zagłosowano ✅",
+    "voting": "Głosowanie...",
+    "vote": "Głosuj",
+    "showLess": "Pokaż mniej ▲",
+    "readMore": "Czytaj więcej ▼",
+    "voteError": "Głosowanie nie powiodło się. Spróbuj ponownie.",
+    "seePhotos": "Zobacz zdjęcia"
   },
   "results": {
     "title": "Wyniki głosowania",
@@ -79,5 +81,14 @@
     "noResults": "Brak dostępnych wyników głosowania."
   },
   "loading": "Ładowanie...",
-  "language": "Język"
+  "language": "Język",
+  "gallery": {
+    "title": "Galeria zdjęć",
+    "description": "Przeglądaj zdjęcia z naszych projektów i zobacz, co osiągnęli nasi ambasadorzy.",
+    "noPhotos": "Brak zdjęć. Sprawdź ponownie wkrótce!",
+    "photoCount": "{{count}} zdjęć",
+    "projectPhotos": "{{count}} zdjęć z tego projektu",
+    "photo": "Zdjęcie",
+    "backToAll": "Powrót do wszystkich projektów"
+  }
 }

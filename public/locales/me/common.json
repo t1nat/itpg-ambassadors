@@ -4,6 +4,7 @@
     "ambassadors": "Ambasadori",
     "teachers": "Nastavnici",
     "projects": "Projekti",
+    "gallery": "Galerija",
     "results": "Rezultati"
   },
   "hero": {
@@ -66,8 +67,18 @@
     "vote": "Vote",
     "showLess": "Show Less ▲",
     "readMore": "Read More ▼",
-    "voteError": "Failed to vote. Try again."
+    "voteError": "Failed to vote. Try again.",
+    "seePhotos": "Pogledaj fotografije"
   },
-  "loading": "Loading...",
-  "language": "Jezik"
+  "loading": "Učitavanje...",
+  "language": "Jezik",
+  "gallery": {
+    "title": "Foto galerija",
+    "description": "Pregledajte fotografije naših projekata i pogledajte šta su naši ambasadori postigli.",
+    "noPhotos": "Još nema dostupnih fotografija. Provjerite uskoro!",
+    "photoCount": "{{count}} fotografija",
+    "projectPhotos": "{{count}} fotografija iz ovog projekta",
+    "photo": "Fotografija",
+    "backToAll": "Nazad na sve projekte"
+  }
 }

@@ -4,6 +4,7 @@
     "ambassadors": "Veľvyslanci",
     "teachers": "Učitelia",
     "projects": "Projekty",
+    "gallery": "Galéria",
     "results": "Výsledky"
   },
   "hero": {
@@ -67,7 +68,8 @@
     "vote": "Hlasovať",
     "showLess": "Zobraziť menej ▲",
     "readMore": "Čítaj viac ▼",
-    "voteError": "Hlasovanie zlyhalo. Skúste znovu."
+    "voteError": "Hlasovanie zlyhalo. Skúste znovu.",
+    "seePhotos": "Pozrieť fotky"
   },
   "results": {
     "title": "Výsledky hlasovania",
@@ -80,5 +82,14 @@
     "noResults": "Zatiaľ nie sú k dispozícii žiadne výsledky hlasovania."
   },
   "loading": "Načítanie...",
-  "language": "Jazyk"
+  "language": "Jazyk",
+  "gallery": {
+    "title": "Fotogaléria",
+    "description": "Prezrite si fotografie z našich projektov a pozrite sa, čo naši veľvyslanci dosiahli.",
+    "noPhotos": "Zatíaľ nie sú k dispozícii žiadne fotografie. Skúste to neskôr!",
+    "photoCount": "{{count}} fotografií",
+    "projectPhotos": "{{count}} fotografií z tohto projektu",
+    "photo": "Fotografia",
+    "backToAll": "Späť ku všetkým projektom"
+  }
 }
