@@ -19,7 +19,7 @@ export function Navigation() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const mounted = useMounted();
-  const { t, locale, setLocale } = useLocale();
+  const { t, i18n, locale, setLocale } = useLocale();
 
   // Sync i18n language with URL locale
   useEffect(() => {
@@ -39,7 +39,7 @@ export function Navigation() {
     setIsOpen(false);
   }, []);
 
-  // Memoize navigation links to prevent recreation on each render
+  // Memoize navigation links - include i18n.language to recalculate on language change
   const links = useMemo(
     () => [
       { href: `/${locale}`, label: t("nav.home") },
@@ -48,7 +48,7 @@ export function Navigation() {
       { href: `/${locale}/projects`, label: t("nav.projects") },
       { href: `/${locale}/results`, label: t("nav.results") },
     ],
-    [locale, t],
+    [locale, t, i18n.language],
   );
 
   // Render placeholder during SSR to prevent hydration mismatch

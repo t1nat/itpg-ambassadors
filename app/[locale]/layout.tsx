@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Navigation } from "@/components/layout/navigation";
 import { Footer } from "@/components/layout/footer";
+import { LocaleSync } from "@/components/providers/locale-sync";
 import { PageTransition } from "@/components/animations/page-transition";
 import { ScrollProgress } from "@/components/animations/scroll-progress";
 import { CustomCursor } from "@/components/animations/custom-cursor";
@@ -29,6 +30,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
     <html lang={locale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange={false}>
+          <LocaleSync />
           <CustomCursor />
           <ScrollProgress />
           <div className="flex min-h-screen flex-col bg-background text-foreground transition-colors duration-300">

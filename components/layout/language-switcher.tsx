@@ -48,7 +48,7 @@ export function LanguageSwitcher() {
 
   const currentLang = languages.find(lang => lang.code === i18n.language) || languages[0]
 
-  const switchLanguage = (newLang: string) => {
+  const switchLanguage = async (newLang: string) => {
     const segments = pathname.split('/').filter(Boolean)
 
     if (segments.length > 0) {
@@ -59,9 +59,10 @@ export function LanguageSwitcher() {
 
     const newPath = `/${segments.join('/')}`
 
-    router.push(newPath)
+    // Change i18n language first so all components re-render with new translations
+    await i18n.changeLanguage(newLang)
 
-    i18n.changeLanguage(newLang)
+    router.push(newPath)
   }
 
   return (
